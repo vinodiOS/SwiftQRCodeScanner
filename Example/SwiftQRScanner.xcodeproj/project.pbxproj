@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1439B0C8F2231BAA241A5959 /* SwiftQRScanner.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = SwiftQRScanner.podspec; path = ../SwiftQRScanner.podspec; sourceTree = "<group>"; };
+		1439B0C8F2231BAA241A5959 /* SwiftQRScanner.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftQRScanner.podspec; path = ../SwiftQRScanner.podspec; sourceTree = "<group>"; };
 		2CAE849E22E2D61AA71F38A5 /* Pods-SwiftQRScanner_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftQRScanner_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftQRScanner_Example/Pods-SwiftQRScanner_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		5B421ACEEE9DD22DD1B6199A /* Pods_SwiftQRScanner_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftQRScanner_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* SwiftQRScanner_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftQRScanner_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,9 +43,9 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7FCE8847FCDD4C26E1EAC7CD /* Pods-SwiftQRScanner_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftQRScanner_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftQRScanner_Example/Pods-SwiftQRScanner_Example.release.xcconfig"; sourceTree = "<group>"; };
 		84519E05CA4DB2FAC1CA5F7B /* Pods-SwiftQRScanner_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftQRScanner_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftQRScanner_Tests/Pods-SwiftQRScanner_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		8F7F2E2586D8B2E3863B68D8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		8F7F2E2586D8B2E3863B68D8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		9726F1593EFBAD6703A0BDD3 /* Pods-SwiftQRScanner_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftQRScanner_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftQRScanner_Tests/Pods-SwiftQRScanner_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		A3D14B008BDA2E4184F0731E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		A3D14B008BDA2E4184F0731E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		FC5B95BA8191310ED384FE91 /* Pods_SwiftQRScanner_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftQRScanner_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -517,7 +517,9 @@
 			baseConfigurationReference = 2CAE849E22E2D61AA71F38A5 /* Pods-SwiftQRScanner_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SwiftQRScanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -532,7 +534,9 @@
 			baseConfigurationReference = 7FCE8847FCDD4C26E1EAC7CD /* Pods-SwiftQRScanner_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SwiftQRScanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -546,6 +550,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 84519E05CA4DB2FAC1CA5F7B /* Pods-SwiftQRScanner_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -567,6 +572,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9726F1593EFBAD6703A0BDD3 /* Pods-SwiftQRScanner_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
