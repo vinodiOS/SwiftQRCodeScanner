@@ -30,7 +30,7 @@ Read QR codes using SwiftQRScanner with easy steps.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'SwiftQRScanner/Classes/**/*'
+  s.source_files = 'Classes/**/*'
   # s.resource_bundles = {
   #   'SwiftQRScanner' => ['SwiftQRScanner/Assets/*.png']
   # }
