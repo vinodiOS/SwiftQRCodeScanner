@@ -128,8 +128,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         
         //Cancel button
         let cancelButton: UIButton = UIButton(frame: CGRect(x: view.frame.width/2 - width/2, y: view.frame.height - height, width: width, height: height))
-        cancelButton.setTitle("X", for: .normal)
-        //cancelButton.setImage(UIImage(named: "cancel"), for: .normal)
+        cancelButton.setImage(UIImage(named: "cancel"), for: .normal)
         cancelButton.addTarget(self, action: #selector(dismissVC), for:.touchUpInside)
         
         //Torch button
