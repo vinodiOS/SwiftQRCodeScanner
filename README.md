@@ -10,6 +10,8 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+- Xcode 9+
+- Swift 4
 
 ## Installation
 
@@ -17,12 +19,12 @@ SwiftQRScanner is available through [CocoaPods](http://cocoapods.org). To instal
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'SwiftQRScanner'
+pod 'SwiftQRScanner', :git => ‘https://github.com/vinodiOS/SwiftQRScanner’
 ```
 
 ## Author
 
-vinodiOS, vinod.jagtap@hotmail.com
+Vinod, vinod.jagtap@hotmail.com
 
 ## License
 
