@@ -20,6 +20,7 @@ class ViewController: UIViewController, QRScannerCodeDelegate {
         
         //let scanner = QRCodeScannerController()
         let scanner = QRCodeScannerController(cameraImage: UIImage(named: "camera"), cancelImage: UIImage(named: "cancel"), flashOnImage: UIImage(named: "flash-on"), flashOffImage: UIImage(named: "flash-off"))
+        scanner.delegate = self
         self.present(scanner, animated: true, completion: nil)
     }
     
