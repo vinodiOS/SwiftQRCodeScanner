@@ -10,14 +10,16 @@ import UIKit
 import SwiftQRScanner
 
 class ViewController: UIViewController, QRScannerCodeDelegate {
-    let scanner = QRCodeScannerController()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    
     @IBAction func scanQRCode(_ sender: Any) {
+        
+        //let scanner = QRCodeScannerController()
+        let scanner = QRCodeScannerController(cameraImage: UIImage(named: "camera"), cancelImage: UIImage(named: "cancel"), flashOnImage: UIImage(named: "flash-on"), flashOffImage: UIImage(named: "flash-off"))
         self.present(scanner, animated: true, completion: nil)
     }
     

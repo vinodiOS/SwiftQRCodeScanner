@@ -39,18 +39,6 @@
 		2FFC32C29A0B0D42B4491E3119265C39 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3631B6811566A18AF5946DB8FD77C52A /* Pods-SwiftQRScanner_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftQRScanner_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		402A23E51FD7189A00E3612F /* SwiftQRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftQRScanner.swift; sourceTree = "<group>"; };
-		40F3DD101FD85C1700F9A1CE /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
-		40F3DD111FD85C2100F9A1CE /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
-		40F3DD121FD85C2F00F9A1CE /* cancel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@3x.png"; sourceTree = "<group>"; };
-		40F3DD131FD85C5F00F9A1CE /* flash-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-off.png"; sourceTree = "<group>"; };
-		40F3DD141FD85C6700F9A1CE /* flash-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-off@2x.png"; sourceTree = "<group>"; };
-		40F3DD151FD85C6F00F9A1CE /* flash-off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-off@3x.png"; sourceTree = "<group>"; };
-		40F3DD161FD85C8800F9A1CE /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
-		40F3DD171FD85C9000F9A1CE /* flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash@2x.png"; sourceTree = "<group>"; };
-		40F3DD181FD85C9800F9A1CE /* flash@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash@3x.png"; sourceTree = "<group>"; };
-		40F3DD191FD85CA200F9A1CE /* switch-camera-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch-camera-button.png"; sourceTree = "<group>"; };
-		40F3DD1A1FD85CA900F9A1CE /* switch-camera-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch-camera-button@2x.png"; sourceTree = "<group>"; };
-		40F3DD1B1FD85CB100F9A1CE /* switch-camera-button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch-camera-button@3x.png"; sourceTree = "<group>"; };
 		43D24BE33EFABFD607A10C9875C3BC8A /* Pods_SwiftQRScanner_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftQRScanner_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F7EE195556DE779E337489955AD3FD /* Pods-SwiftQRScanner_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SwiftQRScanner_Example.modulemap"; sourceTree = "<group>"; };
 		5385E2BCC5A382EFB62403F309846A93 /* Pods-SwiftQRScanner_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SwiftQRScanner_Tests.modulemap"; sourceTree = "<group>"; };
@@ -110,25 +98,6 @@
 				402A23E51FD7189A00E3612F /* SwiftQRScanner.swift */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		40F3DD0F1FD85BC600F9A1CE /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				40F3DD1B1FD85CB100F9A1CE /* switch-camera-button@3x.png */,
-				40F3DD1A1FD85CA900F9A1CE /* switch-camera-button@2x.png */,
-				40F3DD191FD85CA200F9A1CE /* switch-camera-button.png */,
-				40F3DD181FD85C9800F9A1CE /* flash@3x.png */,
-				40F3DD171FD85C9000F9A1CE /* flash@2x.png */,
-				40F3DD161FD85C8800F9A1CE /* flash.png */,
-				40F3DD151FD85C6F00F9A1CE /* flash-off@3x.png */,
-				40F3DD141FD85C6700F9A1CE /* flash-off@2x.png */,
-				40F3DD131FD85C5F00F9A1CE /* flash-off.png */,
-				40F3DD121FD85C2F00F9A1CE /* cancel@3x.png */,
-				40F3DD111FD85C2100F9A1CE /* cancel@2x.png */,
-				40F3DD101FD85C1700F9A1CE /* cancel.png */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		42F693E77C10C84AB5357F517CD7ACBC /* Support Files */ = {
@@ -238,7 +207,6 @@
 		E2DA771CBE9D200E63331C5744E688AC /* SwiftQRScanner */ = {
 			isa = PBXGroup;
 			children = (
-				40F3DD0F1FD85BC600F9A1CE /* Assets */,
 				402A23E71FD718B600E3612F /* Classes */,
 				42F693E77C10C84AB5357F517CD7ACBC /* Support Files */,
 			);

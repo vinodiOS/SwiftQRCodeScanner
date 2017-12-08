@@ -18,8 +18,15 @@ public protocol QRScannerCodeDelegate: class {
 public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     var squareView: SquareView?
-    weak var delegate: QRScannerCodeDelegate?
-    var cameraButton: UIButton = UIButton()
+    public weak var delegate: QRScannerCodeDelegate?
+    var flashButton: UIButton = UIButton()
+    
+    //Extra images for adding extra features
+    public var cameraImage: UIImage?
+    public var cancelImage: UIImage?
+    public var flashOnImage: UIImage?
+    public var flashOffImage: UIImage?
+    
     //Default Properties
     let bottomSpace: CGFloat = 60.0
     var devicePosition: AVCaptureDevice.Position = .back
@@ -32,9 +39,20 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         super.init(nibName: nil, bundle: nil)
     }
     
+    //Convinience init for adding extra images (camera, torch, cancel)
+    convenience public init(cameraImage: UIImage?, cancelImage: UIImage?, flashOnImage: UIImage?, flashOffImage: UIImage?) {
+        self.init()
+        self.cameraImage = cameraImage
+        self.cancelImage = cancelImage
+        self.flashOnImage = flashOnImage
+        self.flashOffImage = flashOffImage
+    }
+    
+    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -118,6 +136,8 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         let rect = CGRect.init(origin: CGPoint.init(x: self.view.frame.width/2 - width/2, y: self.view.frame.height/2 - (width+bottomSpace)/2), size: CGSize.init(width: width, height: height))
         self.squareView = SquareView(frame: rect)
         if let squareView = squareView {
+            self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+            squareView.autoresizingMask = UIViewAutoresizing(rawValue: UInt(0.0))
             self.view.addSubview(squareView)
         }
     }
@@ -125,28 +145,43 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     private func addButtons(_ view: UIView) {
         let height: CGFloat = 44.0
         let width: CGFloat = 44.0
+        let btnWidthWhenCancelImageNil: CGFloat = 60.0
         
         //Cancel button
-        let cancelButton: UIButton = UIButton(frame: CGRect(x: view.frame.width/2 - width/2, y: view.frame.height - height, width: width, height: height))
-        cancelButton.setImage(UIImage(named: "cancel"), for: .normal)
+        let cancelButton = UIButton()
+        if let cancelImg = cancelImage {
+            cancelButton.frame = CGRect(x: view.frame.width/2 - width/2, y: view.frame.height - height, width: width, height: height)
+            cancelButton.setImage(cancelImg, for: .normal)
+        } else {
+            cancelButton.frame = CGRect(x: view.frame.width/2 - btnWidthWhenCancelImageNil/2, y: view.frame.height - height, width: btnWidthWhenCancelImageNil, height: height)
+            cancelButton.setTitle("Cancel", for: .normal)
+        }
+        cancelButton.contentMode = .scaleAspectFit
         cancelButton.addTarget(self, action: #selector(dismissVC), for:.touchUpInside)
+        view.addSubview(cancelButton)
         
         //Torch button
-        let torchButton: UIButton = UIButton(frame: CGRect(x: 16, y: self.view.bounds.size.height - (bottomSpace + height), width: width, height: height))
-        torchButton.setImage(UIImage(named: "flass-off"), for: .normal)
-        torchButton.tintColor = UIColor.white
-        torchButton.addTarget(self, action: #selector(toggleTorch), for: .touchUpInside)
+        flashButton = UIButton(frame: CGRect(x: 16, y: self.view.bounds.size.height - (bottomSpace + height + 10), width: width, height: height))
+        flashButton.tintColor = UIColor.white
+        flashButton.layer.cornerRadius = height/2
+        flashButton.backgroundColor = UIColor.black
+        flashButton.contentMode = .scaleAspectFit
+        flashButton.addTarget(self, action: #selector(toggleTorch), for: .touchUpInside)
+        if let flashOffImg = flashOffImage {
+            flashButton.setImage(flashOffImg, for: .normal)
+            view.addSubview(flashButton)
+        }
         
         //Camera button
-        cameraButton = UIButton(frame: CGRect(x: self.view.bounds.width - (width + 16), y: self.view.bounds.size.height - (bottomSpace + height), width: width, height: height))
-        cameraButton.setImage(UIImage(named: "switch-camera-button"), for: .normal)
+        let cameraButton = UIButton(frame: CGRect(x: self.view.bounds.width - (width + 16), y: self.view.bounds.size.height - (bottomSpace + height + 10), width: width, height: height))
         cameraButton.addTarget(self, action: #selector(switchCamera), for: .touchUpInside)
-        
-        
-        view.addSubview(cancelButton)
-        view.addSubview(torchButton)
-        view.addSubview(cameraButton)
-        
+        cameraButton.layer.cornerRadius = height/2
+        cameraButton.backgroundColor = UIColor.black
+        cameraButton.contentMode = .scaleAspectFit
+        if let cameraImg = cameraImage {
+            cameraButton.setImage(cameraImg, for: .normal)
+            view.addSubview(cameraButton)
+        }
     }
     
     //Toggle torch
@@ -164,7 +199,16 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
             do {
                 try defaultDevice.lockForConfiguration()
                 defaultDevice.torchMode = defaultDevice.torchMode == .on ? .off : .on
-                cameraButton.setImage(defaultDevice.torchMode == .on ? UIImage(named: "flash") : UIImage(named: "flass-off"), for: .normal)
+                if defaultDevice.torchMode == .on {
+                    if let flashOnImage = flashOnImage {
+                        self.flashButton.setImage(flashOnImage, for: .normal)
+                    }
+                } else {
+                    if let flashOffImage = flashOffImage {
+                        self.flashButton.setImage(flashOffImage, for: .normal)
+                    }
+                }
+                
                 defaultDevice.unlockForConfiguration()
             } catch let error as NSError {
                 print(error)
@@ -216,6 +260,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
             if let frontDeviceInput = frontCaptureInput {
                 if !captureSession.canAddInput(frontDeviceInput) {
                     delegate?.qrCodeScanningFailedWithError(error: "Failed to add Input")
+                    self.dismiss(animated: true, completion: nil)
                     return
                 }
                 captureSession.addInput(frontDeviceInput)
@@ -225,6 +270,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
             if let defaultDeviceInput = defaultCaptureInput {
                 if !captureSession.canAddInput(defaultDeviceInput) {
                     delegate?.qrCodeScanningFailedWithError(error: "Failed to add Input")
+                    self.dismiss(animated: true, completion: nil)
                     return
                 }
                 captureSession.addInput(defaultDeviceInput)
@@ -235,6 +281,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         
         if !captureSession.canAddOutput(dataOutput) {
             delegate?.qrCodeScanningFailedWithError(error: "Failed to add Output")
+            self.dismiss(animated: true, completion: nil)
             return
         }
         
@@ -264,6 +311,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
                 }
                 captureSession.stopRunning()
                 removeVideoPriviewlayer()
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
