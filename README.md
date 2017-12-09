@@ -6,7 +6,12 @@
 [![Platform](https://img.shields.io/cocoapods/p/SwiftQRScanner.svg?style=flat)](http://cocoapods.org/pods/SwiftQRScanner)
 
 ## Screenshots
+Without camera and flash buttons:
+
 ![alt text](https://s18.postimg.org/huyl4jkg9/IMG_0282.png "Without camera and flash buttons")
+
+With camera and flash buttons:
+
 ![alt text](https://s18.postimg.org/j8q804end/IMG_0274.png "With camera and flash buttons")
 
 ## Example
