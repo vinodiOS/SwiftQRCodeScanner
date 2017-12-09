@@ -1,4 +1,4 @@
-# SwiftQRScanner
+# SwiftQRCodeScanner
 
 [![CI Status](http://img.shields.io/travis/vinodiOS/SwiftQRScanner.svg?style=flat)](https://travis-ci.org/vinodiOS/SwiftQRScanner)
 [![Version](https://img.shields.io/cocoapods/v/SwiftQRScanner.svg?style=flat)](http://cocoapods.org/pods/SwiftQRScanner)
@@ -10,6 +10,7 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+- iOS 9
 - Xcode 9+
 - Swift 4
 
