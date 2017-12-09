@@ -55,11 +55,11 @@ self.present(scanner, animated: true, completion: nil)
 And finally implement delegate methods to get result:
 ```
 func qrCodeScanningDidCompleteWithResult(result: String) {
-print(result)
+    print(result)
 }
 
 func qrCodeScanningFailedWithError(error: String) {
-print(error)
+    print(error)
 }
 ```
 
