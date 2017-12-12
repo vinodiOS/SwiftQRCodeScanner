@@ -8,11 +8,11 @@
 ## Screenshots
 Without camera and flash buttons:
 
-![alt text](https://s18.postimg.org/huyl4jkg9/IMG_0282.png "Without camera and flash buttons")
+![alt text](https://s2.postimg.org/ndrpxvax5/IMG_0300.png "Without camera and flash buttons")
 
 With camera and flash buttons:
 
-![alt text](https://s18.postimg.org/j8q804end/IMG_0274.png "With camera and flash buttons")
+![alt text](https://s2.postimg.org/utqzjre2x/IMG_0299.png "With camera and flash buttons")
 
 ## Example
 
