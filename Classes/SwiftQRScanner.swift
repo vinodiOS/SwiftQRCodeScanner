@@ -9,11 +9,16 @@ import UIKit
 import CoreGraphics
 import AVFoundation
 
-//QRScannerCodeDelegate Protocol
+///
+///  This protocol defines methods which get called when some events occures.
+///
 public protocol QRScannerCodeDelegate: class {
     func qrCodeScanningDidCompleteWithResult(result: String)
     func qrCodeScanningFailedWithError(error: String)
 }
+
+///QRCodeScannerController is ViewController which calls up method which presents view with AVCaptureSession and previewLayer
+///to scan QR and other codes.
 
 public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -29,11 +34,8 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     
     //Default Properties
     let bottomSpace: CGFloat = 60.0
+    let spaceFactor: CGFloat = 16.0
     var devicePosition: AVCaptureDevice.Position = .back
-    open var qrScannerFrame: CGRect = CGRect.zero
-    
-    //Initialization part
-    lazy var captureSession = AVCaptureSession()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
@@ -53,7 +55,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    //MARK: Life cycle methods
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Currently only "Portraint" mode is supported
@@ -67,15 +69,17 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         // Dispose of any resources that can be recreated.
     }
     
-    /// Lazy initialization of properties
+    //MARK: - Lazy initialization of properties
+    
+    ///Initialise CaptureDevice
     lazy var defaultDevice: AVCaptureDevice? = {
         if let device = AVCaptureDevice.default(for: .video) {
             return device
         }
-        
         return nil
     }()
     
+    ///Initialise front CaptureDevice
     lazy var frontDevice: AVCaptureDevice? = {
         if #available(iOS 10, *) {
             if let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
@@ -91,6 +95,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         return nil
     }()
     
+    ///Initialise AVCaptureInput with defaultDevice
     lazy var defaultCaptureInput: AVCaptureInput? = {
         if let captureDevice = defaultDevice {
             do {
@@ -102,6 +107,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         return nil
     }()
     
+    ///Initialise AVCaptureInput with frontDevice
     lazy var frontCaptureInput: AVCaptureInput?  = {
         if let captureDevice = frontDevice {
             do {
@@ -115,6 +121,10 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     
     lazy var dataOutput = AVCaptureMetadataOutput()
     
+    ///Initialise capture session
+    lazy var captureSession = AVCaptureSession()
+    
+    ///Initialise videoPreviewLayer with capture session
     lazy var videoPreviewLayer: AVCaptureVideoPreviewLayer = {
         let layer = AVCaptureVideoPreviewLayer(session: self.captureSession)
         layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -122,26 +132,54 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         return layer
     }()
     
-    open func prepareQRScannerView(_ view: UIView) {
-        qrScannerFrame = view.frame
-        setupCaptureSession(devicePosition)//Default device capture position is back
+    /// This calls up methods which makes code ready for scan codes.
+    /// - parameter view: UIView in which you want to add scanner.
+    
+    func prepareQRScannerView(_ view: UIView) {
+        setupCaptureSession(devicePosition) //Default device capture position is rear
         addViedoPreviewLayer(view)
         createCornerFrame()
         addButtons(view)
     }
     
-    private func createCornerFrame() {
+    ///Creates corner rectagle frame with green coloe(default color)
+    func createCornerFrame() {
         let width: CGFloat = 200.0
         let height: CGFloat = 200.0
-        let rect = CGRect.init(origin: CGPoint.init(x: self.view.frame.width/2 - width/2, y: self.view.frame.height/2 - (width+bottomSpace)/2), size: CGSize.init(width: width, height: height))
+        
+        let rect = CGRect.init(origin: CGPoint.init(x: self.view.frame.midX - width/2, y: self.view.frame.midY - (width+bottomSpace)/2), size: CGSize.init(width: width, height: height))
         self.squareView = SquareView(frame: rect)
         if let squareView = squareView {
             self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
             squareView.autoresizingMask = UIViewAutoresizing(rawValue: UInt(0.0))
             self.view.addSubview(squareView)
+            
+            addMaskLayerToVideoPreviewLayerAndAddText(rect: rect)
         }
     }
     
+    func addMaskLayerToVideoPreviewLayerAndAddText(rect: CGRect) {
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = view.bounds
+        maskLayer.fillColor = UIColor(white: 0.0, alpha: 0.5).cgColor
+        let path = UIBezierPath(rect: rect)
+        path.append(UIBezierPath(rect: view.bounds))
+        maskLayer.path = path.cgPath
+        maskLayer.fillRule = kCAFillRuleEvenOdd
+        
+        view.layer.insertSublayer(maskLayer, above: videoPreviewLayer)
+        
+        let noteText = CATextLayer()
+        noteText.fontSize = 18.0
+        noteText.string = "Align QR code within frame to scan"
+        noteText.alignmentMode = kCAAlignmentCenter
+        noteText.contentsScale = UIScreen.main.scale
+        noteText.frame = CGRect(x: spaceFactor, y: rect.origin.y + rect.size.height + 30, width: view.frame.size.width - (2.0 * spaceFactor), height: 22)
+        noteText.foregroundColor = UIColor.white.cgColor
+        view.layer.insertSublayer(noteText, above: maskLayer)
+    }
+    
+    /// Adds buttons to view which can we used as extra fearures
     private func addButtons(_ view: UIView) {
         let height: CGFloat = 44.0
         let width: CGFloat = 44.0
@@ -164,7 +202,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         flashButton = UIButton(frame: CGRect(x: 16, y: self.view.bounds.size.height - (bottomSpace + height + 10), width: width, height: height))
         flashButton.tintColor = UIColor.white
         flashButton.layer.cornerRadius = height/2
-        flashButton.backgroundColor = UIColor.black
+        flashButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         flashButton.contentMode = .scaleAspectFit
         flashButton.addTarget(self, action: #selector(toggleTorch), for: .touchUpInside)
         if let flashOffImg = flashOffImage {
@@ -176,7 +214,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         let cameraButton = UIButton(frame: CGRect(x: self.view.bounds.width - (width + 16), y: self.view.bounds.size.height - (bottomSpace + height + 10), width: width, height: height))
         cameraButton.addTarget(self, action: #selector(switchCamera), for: .touchUpInside)
         cameraButton.layer.cornerRadius = height/2
-        cameraButton.backgroundColor = UIColor.black
+        cameraButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         cameraButton.contentMode = .scaleAspectFit
         if let cameraImg = cameraImage {
             cameraButton.setImage(cameraImg, for: .normal)
@@ -186,7 +224,6 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     
     //Toggle torch
     @objc func toggleTorch() {
-        
         //If device postion is front then no need to torch
         if let currentInput = getCurrentInput() {
             if currentInput.device.position == .front {
@@ -236,11 +273,12 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         return nil
     }
     
-    //dismiss ViewController
     @objc func dismissVC() {
         removeVideoPriviewlayer()
         self.dismiss(animated: true, completion: nil)
     }
+    
+    //MARK: - Setup and start capturing session
     
     open func startScanningQRCode() {
         if captureSession.isRunning {
@@ -250,7 +288,6 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     }
     
     private func setupCaptureSession(_ devicePostion: AVCaptureDevice.Position) {
-        
         if captureSession.isRunning {
             return
         }
@@ -276,7 +313,6 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
                 captureSession.addInput(defaultDeviceInput)
             }
             break
-            
         }
         
         if !captureSession.canAddOutput(dataOutput) {
@@ -290,11 +326,13 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         dataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
     }
     
+    ///Inserts layer to view
     private func addViedoPreviewLayer(_ view: UIView) {
         videoPreviewLayer.frame = CGRect(x:view.bounds.origin.x, y: view.bounds.origin.y, width: view.bounds.size.width, height: view.bounds.size.height - bottomSpace)
         view.layer.insertSublayer(videoPreviewLayer, at: 0)
     }
     
+    ///Removes videoPreviewLayer from view
     private func removeVideoPriviewlayer() {
         videoPreviewLayer.removeFromSuperlayer()
     }
@@ -317,8 +355,8 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     }
 }
 
-//Currently Scanner suppoerts only portrait mode.
-
+///Currently Scanner suppoerts only portrait mode.
+///This makes sure orientation is portrait
 extension QRCodeScannerController {
     ///Make orientations to portrait
     override public var shouldAutorotate: Bool {
@@ -340,7 +378,7 @@ extension QRCodeScannerController {
 @IBDesignable
 class SquareView: UIView {
     @IBInspectable
-    var sizeMultiplier : CGFloat = 0.2 {
+    var sizeMultiplier : CGFloat = 0.1 {
         didSet{
             self.draw(self.bounds)
         }
@@ -359,7 +397,6 @@ class SquareView: UIView {
             self.draw(self.bounds)
         }
     }
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

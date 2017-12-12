@@ -29,11 +29,11 @@ class ViewController: UIViewController, QRScannerCodeDelegate {
     
     //SwiftQRScanner delegate methods
     func qrCodeScanningDidCompleteWithResult(result: String) {
-        print(result)
+        print("result: \(result)")
     }
     
     func qrCodeScanningFailedWithError(error: String) {
-        print(error)
+        print("error:\(error)")
     }
     
     override func didReceiveMemoryWarning() {
