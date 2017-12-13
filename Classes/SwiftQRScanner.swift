@@ -37,7 +37,12 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     let bottomSpace: CGFloat = 60.0
     let spaceFactor: CGFloat = 16.0
     var devicePosition: AVCaptureDevice.Position = .back
+    var delCnt: Int = 0
     
+    ///This is for adding delay so user will get sufficient time for align QR within frame
+    let delayCount: Int = 15
+    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
@@ -60,6 +65,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         super.viewWillAppear(animated)
         //Currently only "Portraint" mode is supported
         UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        delCnt = 0
         prepareQRScannerView(self.view)
         startScanningQRCode()
     }
@@ -334,16 +340,22 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     
     /// This method get called when Scanning gets complete
     public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        
         for data in metadataObjects {
             let transformed = videoPreviewLayer.transformedMetadataObject(for: data) as? AVMetadataMachineReadableCodeObject
             if let unwraped = transformed {
-                if let unwrapedStringValue = unwraped.stringValue {
-                    delegate?.qrScanner(self, scanDidComplete: unwrapedStringValue)
-                } else {
-                    delegate?.qrScannerDidFail(self, error: "Empty string found")
+                if view.bounds.contains(unwraped.bounds) {
+                    delCnt = delCnt + 1
+                    if delCnt > delayCount {
+                        if let unwrapedStringValue = unwraped.stringValue {
+                            delegate?.qrScanner(self, scanDidComplete: unwrapedStringValue)
+                        } else {
+                            delegate?.qrScannerDidFail(self, error: "Empty string found")
+                        }
+                        captureSession.stopRunning()
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
-                captureSession.stopRunning()
-                self.dismiss(animated: true, completion: nil)
             }
         }
     }
