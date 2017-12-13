@@ -41,7 +41,10 @@ Import SwiftQRScanner module and confirm to the QRScannerCodeDelegate protocol.
 ```
 #import SwiftQRScanner
 
-class ViewController: UIViewController, QRScannerCodeDelegate {
+class ViewController: UIViewController {
+}
+
+extension ViewController: QRScannerCodeDelegate {
 }
 ```
 
@@ -59,12 +62,16 @@ self.present(scanner, animated: true, completion: nil)
 ```
 And finally implement delegate methods to get result:
 ```
-func qrCodeScanningDidCompleteWithResult(result: String) {
-    print(result)
+func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
+    print("result:\(result)")
 }
 
-func qrCodeScanningFailedWithError(error: String) {
-    print(error)
+func qrScannerDidFail(_ controller: UIViewController, error: String) {
+    print("error:\(error)")
+}
+
+func qrScannerDidCancel(_ controller: UIViewController) {
+    print("SwiftQRScanner did cancel")
 }
 ```
 
