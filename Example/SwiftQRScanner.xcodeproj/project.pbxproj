@@ -215,12 +215,10 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 5G8C8JMEG4;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 5G8C8JMEG4;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -519,7 +517,7 @@
 			baseConfigurationReference = 2CAE849E22E2D61AA71F38A5 /* Pods-SwiftQRScanner_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5G8C8JMEG4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SwiftQRScanner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -536,7 +534,7 @@
 			baseConfigurationReference = 7FCE8847FCDD4C26E1EAC7CD /* Pods-SwiftQRScanner_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5G8C8JMEG4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SwiftQRScanner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -552,7 +550,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 84519E05CA4DB2FAC1CA5F7B /* Pods-SwiftQRScanner_Tests.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 5G8C8JMEG4;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -574,7 +572,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9726F1593EFBAD6703A0BDD3 /* Pods-SwiftQRScanner_Tests.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 5G8C8JMEG4;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

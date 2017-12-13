@@ -13,8 +13,9 @@ import AVFoundation
 ///  This protocol defines methods which get called when some events occures.
 ///
 public protocol QRScannerCodeDelegate: class {
-    func qrCodeScanningDidCompleteWithResult(result: String)
-    func qrCodeScanningFailedWithError(error: String)
+    func qrScanner(_ controller: UIViewController, scanDidComplete result: String)
+    func qrScannerDidFail(_ controller: UIViewController,  error: String)
+    func qrScannerDidCancel(_ controller: UIViewController)
 }
 
 ///QRCodeScannerController is ViewController which calls up method which presents view with AVCaptureSession and previewLayer
@@ -41,7 +42,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         super.init(nibName: nil, bundle: nil)
     }
     
-    //Convinience init for adding extra images (camera, torch, cancel)
+    ///Convinience init for adding extra images (camera, torch, cancel)
     convenience public init(cameraImage: UIImage?, cancelImage: UIImage?, flashOnImage: UIImage?, flashOffImage: UIImage?) {
         self.init()
         self.cameraImage = cameraImage
@@ -49,7 +50,6 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         self.flashOnImage = flashOnImage
         self.flashOffImage = flashOffImage
     }
-    
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -274,8 +274,8 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     }
     
     @objc func dismissVC() {
-        removeVideoPriviewlayer()
         self.dismiss(animated: true, completion: nil)
+        delegate?.qrScannerDidCancel(self)
     }
     
     //MARK: - Setup and start capturing session
@@ -296,7 +296,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         case .front:
             if let frontDeviceInput = frontCaptureInput {
                 if !captureSession.canAddInput(frontDeviceInput) {
-                    delegate?.qrCodeScanningFailedWithError(error: "Failed to add Input")
+                    delegate?.qrScannerDidFail(self, error: "Failed to add Input")
                     self.dismiss(animated: true, completion: nil)
                     return
                 }
@@ -306,7 +306,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         case .back, .unspecified :
             if let defaultDeviceInput = defaultCaptureInput {
                 if !captureSession.canAddInput(defaultDeviceInput) {
-                    delegate?.qrCodeScanningFailedWithError(error: "Failed to add Input")
+                    delegate?.qrScannerDidFail(self, error: "Failed to add Input")
                     self.dismiss(animated: true, completion: nil)
                     return
                 }
@@ -316,7 +316,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         }
         
         if !captureSession.canAddOutput(dataOutput) {
-            delegate?.qrCodeScanningFailedWithError(error: "Failed to add Output")
+            delegate?.qrScannerDidFail(self, error: "Failed to add Output")
             self.dismiss(animated: true, completion: nil)
             return
         }
@@ -332,23 +332,17 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         view.layer.insertSublayer(videoPreviewLayer, at: 0)
     }
     
-    ///Removes videoPreviewLayer from view
-    private func removeVideoPriviewlayer() {
-        videoPreviewLayer.removeFromSuperlayer()
-    }
-    
     /// This method get called when Scanning gets complete
     public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         for data in metadataObjects {
             let transformed = videoPreviewLayer.transformedMetadataObject(for: data) as? AVMetadataMachineReadableCodeObject
             if let unwraped = transformed {
-                if unwraped.stringValue != nil {
-                    delegate?.qrCodeScanningDidCompleteWithResult(result: unwraped.stringValue!)
+                if let unwrapedStringValue = unwraped.stringValue {
+                    delegate?.qrScanner(self, scanDidComplete: unwrapedStringValue)
                 } else {
-                    delegate?.qrCodeScanningFailedWithError(error: "Empty string found")
+                    delegate?.qrScannerDidFail(self, error: "Empty string found")
                 }
                 captureSession.stopRunning()
-                removeVideoPriviewlayer()
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -372,9 +366,9 @@ extension QRCodeScannerController {
     }
 }
 
-/** This class is for draw corners of Square to show frame for scan QR code.
- *  @IBInspectable parameters are the line color, sizeMultiplier, line width.
- */
+/// This class is for draw corners of Square to show frame for scan QR code.
+///@IBInspectable parameters are the line color, sizeMultiplier, line width.
+
 @IBDesignable
 class SquareView: UIView {
     @IBInspectable
@@ -409,43 +403,43 @@ class SquareView: UIView {
     }
     
     func drawCorners() {
-        let currentContext = UIGraphicsGetCurrentContext()
+        let rectCornerContext = UIGraphicsGetCurrentContext()
         
-        currentContext?.setLineWidth(lineWidth)
-        currentContext?.setStrokeColor(lineColor.cgColor)
+        rectCornerContext?.setLineWidth(lineWidth)
+        rectCornerContext?.setStrokeColor(lineColor.cgColor)
         
         //top left corner
-        currentContext?.beginPath()
-        currentContext?.move(to: CGPoint(x: 0, y: 0))
-        currentContext?.addLine(to: CGPoint(x: self.bounds.size.width*sizeMultiplier, y: 0))
-        currentContext?.strokePath()
+        rectCornerContext?.beginPath()
+        rectCornerContext?.move(to: CGPoint(x: 0, y: 0))
+        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width*sizeMultiplier, y: 0))
+        rectCornerContext?.strokePath()
         
         //top rigth corner
-        currentContext?.beginPath()
-        currentContext?.move(to: CGPoint(x: self.bounds.size.width - self.bounds.size.width*sizeMultiplier, y: 0))
-        currentContext?.addLine(to: CGPoint(x: self.bounds.size.width, y: 0))
-        currentContext?.addLine(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height*sizeMultiplier))
-        currentContext?.strokePath()
+        rectCornerContext?.beginPath()
+        rectCornerContext?.move(to: CGPoint(x: self.bounds.size.width - self.bounds.size.width*sizeMultiplier, y: 0))
+        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width, y: 0))
+        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height*sizeMultiplier))
+        rectCornerContext?.strokePath()
         
         //bottom rigth corner
-        currentContext?.beginPath()
-        currentContext?.move(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height - self.bounds.size.height*sizeMultiplier))
-        currentContext?.addLine(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height))
-        currentContext?.addLine(to: CGPoint(x: self.bounds.size.width - self.bounds.size.width*sizeMultiplier, y: self.bounds.size.height))
-        currentContext?.strokePath()
+        rectCornerContext?.beginPath()
+        rectCornerContext?.move(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height - self.bounds.size.height*sizeMultiplier))
+        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height))
+        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width - self.bounds.size.width*sizeMultiplier, y: self.bounds.size.height))
+        rectCornerContext?.strokePath()
         
         //bottom left corner
-        currentContext?.beginPath()
-        currentContext?.move(to: CGPoint(x: self.bounds.size.width*sizeMultiplier, y: self.bounds.size.height))
-        currentContext?.addLine(to: CGPoint(x: 0, y: self.bounds.size.height))
-        currentContext?.addLine(to: CGPoint(x: 0, y: self.bounds.size.height - self.bounds.size.height*sizeMultiplier))
-        currentContext?.strokePath()
+        rectCornerContext?.beginPath()
+        rectCornerContext?.move(to: CGPoint(x: self.bounds.size.width*sizeMultiplier, y: self.bounds.size.height))
+        rectCornerContext?.addLine(to: CGPoint(x: 0, y: self.bounds.size.height))
+        rectCornerContext?.addLine(to: CGPoint(x: 0, y: self.bounds.size.height - self.bounds.size.height*sizeMultiplier))
+        rectCornerContext?.strokePath()
         
         //second part of top left corner
-        currentContext?.beginPath()
-        currentContext?.move(to: CGPoint(x: 0, y: self.bounds.size.height*sizeMultiplier))
-        currentContext?.addLine(to: CGPoint(x: 0, y: 0))
-        currentContext?.strokePath()
+        rectCornerContext?.beginPath()
+        rectCornerContext?.move(to: CGPoint(x: 0, y: self.bounds.size.height*sizeMultiplier))
+        rectCornerContext?.addLine(to: CGPoint(x: 0, y: 0))
+        rectCornerContext?.strokePath()
     }
     
     override func draw(_ rect: CGRect) {
