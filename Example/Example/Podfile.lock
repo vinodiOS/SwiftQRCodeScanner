@@ -1,0 +1,16 @@
+PODS:
+  - SwiftQRScanner (0.1.0)
+
+DEPENDENCIES:
+  - SwiftQRScanner (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftQRScanner:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SwiftQRScanner: bcfa0c00bfb599766b1ac91894275091a2d37640
+
+PODFILE CHECKSUM: 24ee3d93cb6ca5fc529b49e62e7ba5ce23502fa6
+
+COCOAPODS: 1.3.1

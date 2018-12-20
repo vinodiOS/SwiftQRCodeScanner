@@ -1,0 +1,22 @@
+{
+  "name": "SwiftQRScanner",
+  "version": "0.1.0",
+  "summary": "A short description of SwiftQRScanner.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/vinodiOS/SwiftQRScanner",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "vinodiOS": "vinod.jagtap@hotmail.com"
+  },
+  "source": {
+    "git": "https://github.com/vinodiOS/SwiftQRScanner.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "SwiftQRScanner/Classes/**/*"
+}

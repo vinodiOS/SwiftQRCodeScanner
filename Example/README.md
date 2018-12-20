@@ -19,7 +19,7 @@ With camera and flash buttons:
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
-- iOS 9.0
+- iOS 9
 - Xcode 9+
 - Swift 4
 

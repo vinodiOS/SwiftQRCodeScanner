@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SwiftQRScanner_Example' do
+  pod 'SwiftQRScanner', :path => '../'
+
+  target 'SwiftQRScanner_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
