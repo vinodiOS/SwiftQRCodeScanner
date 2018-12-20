@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to scan images</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Used to scan images</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Used to scan images</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

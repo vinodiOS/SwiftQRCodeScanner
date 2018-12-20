@@ -9,6 +9,12 @@ import UIKit
 import CoreGraphics
 import AVFoundation
 
+///This enum defines the scan modes
+public enum QRScanMode {
+    case camera
+    case gallery
+}
+
 ///
 ///  This protocol defines methods which get called when some events occures.
 ///
@@ -21,8 +27,9 @@ public protocol QRScannerCodeDelegate: class {
 ///QRCodeScannerController is ViewController which calls up method which presents view with AVCaptureSession and previewLayer
 ///to scan QR and other codes.
 
-public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIImagePickerControllerDelegate, UINavigationBarDelegate {
     
+    public var mode: QRScanMode = .camera
     var squareView: SquareView?
     public weak var delegate: QRScannerCodeDelegate?
     var flashButton: UIButton = UIButton()
@@ -42,7 +49,6 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     ///This is for adding delay so user will get sufficient time for align QR within frame
     let delayCount: Int = 15
     
-
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
@@ -64,15 +70,23 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Currently only "Portraint" mode is supported
-        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-        delCnt = 0
-        prepareQRScannerView(self.view)
-        startScanningQRCode()
-    }
-    
-    override public func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        
+        let imagepicker = UIImagePickerController()
+        
+        if imagepicker.isEditing {
+            return
+        }
+        
+        if mode == .camera {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+            delCnt = 0
+            prepareQRScannerView(self.view)
+            startScanningQRCode()
+        } else {
+            imagepicker.sourceType = .savedPhotosAlbum
+            self.present(imagepicker, animated: true, completion: nil)
+        }
     }
     
     //MARK: - Lazy initialization of properties
@@ -359,7 +373,33 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
             }
         }
     }
+    
+    ///This method get called when scan mode is Gallery
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let qrcodeImg = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])!
+            let ciImage:CIImage=CIImage(image:qrcodeImg)!
+            var qrCodeLink=""
+            
+            let features=detector.features(in: ciImage)
+            for feature in features as! [CIQRCodeFeature] {
+                qrCodeLink += feature.messageString!
+            }
+            
+            if qrCodeLink=="" {
+                print("nothing")
+            }else{
+                print("message: \(qrCodeLink)")
+            }
+        }
+        else{
+            print("Something went wrong")
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
+
 
 ///Currently Scanner suppoerts only portrait mode.
 ///This makes sure orientation is portrait
@@ -381,23 +421,19 @@ extension QRCodeScannerController {
 /// This class is for draw corners of Square to show frame for scan QR code.
 ///@IBInspectable parameters are the line color, sizeMultiplier, line width.
 
-@IBDesignable
 class SquareView: UIView {
-    @IBInspectable
     var sizeMultiplier : CGFloat = 0.1 {
         didSet{
             self.draw(self.bounds)
         }
     }
-    
-    @IBInspectable
+
     var lineWidth : CGFloat = 2 {
         didSet{
             self.draw(self.bounds)
         }
     }
-    
-    @IBInspectable
+
     var lineColor : UIColor = UIColor.green {
         didSet{
             self.draw(self.bounds)

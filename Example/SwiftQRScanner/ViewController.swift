@@ -24,14 +24,10 @@ class ViewController: UIViewController {
         //QRCode with Camera switch and Torch
         let scanner = QRCodeScannerController(cameraImage: UIImage(named: "camera"), cancelImage: UIImage(named: "cancel"), flashOnImage: UIImage(named: "flash-on"), flashOffImage: UIImage(named: "flash-off"))
         scanner.delegate = self
+        scanner.mode = .gallery
         self.present(scanner, animated: true, completion: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
 
 extension ViewController: QRScannerCodeDelegate {
