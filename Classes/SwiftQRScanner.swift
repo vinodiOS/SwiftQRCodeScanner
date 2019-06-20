@@ -19,6 +19,7 @@ public enum QRScanMode {
 ///  This protocol defines methods which get called when some events occures.
 ///
 public protocol QRScannerCodeDelegate: class {
+    
     func qrScanner(_ controller: UIViewController, scanDidComplete result: String)
     func qrScannerDidFail(_ controller: UIViewController,  error: String)
     func qrScannerDidCancel(_ controller: UIViewController)
@@ -171,7 +172,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         self.squareView = SquareView(frame: rect)
         if let squareView = squareView {
             self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
-            squareView.autoresizingMask = UIViewAutoresizing(rawValue: UInt(0.0))
+            squareView.autoresizingMask = UIView.AutoresizingMask(rawValue: UInt(0.0))
             self.view.addSubview(squareView)
             
             addMaskLayerToVideoPreviewLayerAndAddText(rect: rect)
@@ -185,14 +186,14 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         let path = UIBezierPath(rect: rect)
         path.append(UIBezierPath(rect: view.bounds))
         maskLayer.path = path.cgPath
-        maskLayer.fillRule = kCAFillRuleEvenOdd
+        maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
         
         view.layer.insertSublayer(maskLayer, above: videoPreviewLayer)
         
         let noteText = CATextLayer()
         noteText.fontSize = 18.0
         noteText.string = "Align QR code within frame to scan"
-        noteText.alignmentMode = kCAAlignmentCenter
+        noteText.alignmentMode = CATextLayerAlignmentMode.center
         noteText.contentsScale = UIScreen.main.scale
         noteText.frame = CGRect(x: spaceFactor, y: rect.origin.y + rect.size.height + 30, width: view.frame.size.width - (2.0 * spaceFactor), height: 22)
         noteText.foregroundColor = UIColor.white.cgColor
@@ -375,8 +376,11 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     }
     
     ///This method get called when scan mode is Gallery
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let qrcodeImg = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+        if let qrcodeImg = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])!
             let ciImage:CIImage=CIImage(image:qrcodeImg)!
             var qrCodeLink=""
@@ -495,4 +499,14 @@ class SquareView: UIView {
         self.drawCorners()
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }
