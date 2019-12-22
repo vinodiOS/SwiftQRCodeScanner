@@ -8,11 +8,11 @@
 ## Screenshots
 Without camera and flash buttons:
 
-![alt text](https://s2.postimg.org/ndrpxvax5/IMG_0300.png "Without camera and flash buttons")
+![alt text](https://user-images.githubusercontent.com/30258541/71320186-e2315180-24cd-11ea-8be8-a616eb0e2c37.png "Without camera and flash buttons")
 
 With camera and flash buttons:
 
-![alt text](https://s2.postimg.org/utqzjre2x/IMG_0299.png "With camera and flash buttons")
+![alt text](https://user-images.githubusercontent.com/30258541/71320169-97afd500-24cd-11ea-89c7-5d6be7c2fc55.png "With camera and flash buttons")
 
 ## Example
 
@@ -20,8 +20,8 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 - iOS 9.0
-- Xcode 9+
-- Swift 4
+- Xcode 11.0+
+- Swift 5
 
 ## Installation
 ### Using CocoaPods

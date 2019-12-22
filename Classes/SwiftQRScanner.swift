@@ -15,9 +15,9 @@ public enum QRScanMode {
     case gallery
 }
 
-///
-///  This protocol defines methods which get called when some events occures.
-///
+/*
+ This protocol defines methods which get called when some events occures.
+ */
 public protocol QRScannerCodeDelegate: class {
     
     func qrScanner(_ controller: UIViewController, scanDidComplete result: String)
@@ -25,74 +25,34 @@ public protocol QRScannerCodeDelegate: class {
     func qrScannerDidCancel(_ controller: UIViewController)
 }
 
-///QRCodeScannerController is ViewController which calls up method which presents view with AVCaptureSession and previewLayer
-///to scan QR and other codes.
+/*
+ QRCodeScannerController is ViewController which calls up method which presents view with AVCaptureSession and previewLayer
+ to scan QR and other codes.
+ */
 
 public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIImagePickerControllerDelegate, UINavigationBarDelegate {
     
     public var mode: QRScanMode = .camera
-    var squareView: SquareView?
+    var squareView: SquareView? = nil
     public weak var delegate: QRScannerCodeDelegate?
     var flashButton: UIButton = UIButton()
     
     //Extra images for adding extra features
-    public var cameraImage: UIImage?
-    public var cancelImage: UIImage?
-    public var flashOnImage: UIImage?
-    public var flashOffImage: UIImage?
+    public var cameraImage: UIImage? = nil
+    public var cancelImage: UIImage? = nil
+    public var flashOnImage: UIImage? = nil
+    public var flashOffImage: UIImage? = nil
     
     //Default Properties
-    let bottomSpace: CGFloat = 60.0
-    let spaceFactor: CGFloat = 16.0
-    var devicePosition: AVCaptureDevice.Position = .back
-    var delCnt: Int = 0
+    private let bottomSpace: CGFloat = 60.0
+    private let spaceFactor: CGFloat = 16.0
+    private let devicePosition: AVCaptureDevice.Position = .back
+    private var delCnt: Int = 0
     
-    ///This is for adding delay so user will get sufficient time for align QR within frame
-    let delayCount: Int = 15
+    //This is for adding delay so user will get sufficient time for align QR within frame
+    private let delayCount: Int = 15
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    ///Convinience init for adding extra images (camera, torch, cancel)
-    convenience public init(cameraImage: UIImage?, cancelImage: UIImage?, flashOnImage: UIImage?, flashOffImage: UIImage?) {
-        self.init()
-        self.cameraImage = cameraImage
-        self.cancelImage = cancelImage
-        self.flashOnImage = flashOnImage
-        self.flashOffImage = flashOffImage
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK: Life cycle methods
-    override public func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //Currently only "Portraint" mode is supported
-        
-        
-        let imagepicker = UIImagePickerController()
-        
-        if imagepicker.isEditing {
-            return
-        }
-        
-        if mode == .camera {
-            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-            delCnt = 0
-            prepareQRScannerView(self.view)
-            startScanningQRCode()
-        } else {
-            imagepicker.sourceType = .savedPhotosAlbum
-            self.present(imagepicker, animated: true, completion: nil)
-        }
-    }
-    
-    //MARK: - Lazy initialization of properties
-    
-    ///Initialise CaptureDevice
+    //Initialise CaptureDevice
     lazy var defaultDevice: AVCaptureDevice? = {
         if let device = AVCaptureDevice.default(for: .video) {
             return device
@@ -100,7 +60,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         return nil
     }()
     
-    ///Initialise front CaptureDevice
+    //Initialise front CaptureDevice
     lazy var frontDevice: AVCaptureDevice? = {
         if #available(iOS 10, *) {
             if let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
@@ -108,15 +68,13 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
             }
         } else {
             for device in AVCaptureDevice.devices(for: .video) {
-                if device.position == .front {
-                    return device
-                }
+                if device.position == .front { return device }
             }
         }
         return nil
     }()
     
-    ///Initialise AVCaptureInput with defaultDevice
+    //Initialise AVCaptureInput with defaultDevice
     lazy var defaultCaptureInput: AVCaptureInput? = {
         if let captureDevice = defaultDevice {
             do {
@@ -128,7 +86,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         return nil
     }()
     
-    ///Initialise AVCaptureInput with frontDevice
+    //Initialise AVCaptureInput with frontDevice
     lazy var frontCaptureInput: AVCaptureInput?  = {
         if let captureDevice = frontDevice {
             do {
@@ -142,10 +100,10 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     
     lazy var dataOutput = AVCaptureMetadataOutput()
     
-    ///Initialise capture session
+    //Initialise capture session
     lazy var captureSession = AVCaptureSession()
     
-    ///Initialise videoPreviewLayer with capture session
+    //Initialise videoPreviewLayer with capture session
     lazy var videoPreviewLayer: AVCaptureVideoPreviewLayer = {
         let layer = AVCaptureVideoPreviewLayer(session: self.captureSession)
         layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -153,8 +111,50 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         return layer
     }()
     
-    /// This calls up methods which makes code ready for scan codes.
-    /// - parameter view: UIView in which you want to add scanner.
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    //Convinience init for adding extra images (camera, torch, cancel)
+    convenience public init(cameraImage: UIImage?, cancelImage: UIImage?, flashOnImage: UIImage?, flashOffImage: UIImage?) {
+        self.init()
+        self.cameraImage = cameraImage
+        self.cancelImage = cancelImage
+        self.flashOnImage = flashOnImage
+        self.flashOffImage = flashOffImage
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("SwiftQRScanner deallocating...")
+    }
+    
+    //MARK: Life cycle methods
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //Currently only "Portraint" mode is supported
+        
+        let imagepicker = UIImagePickerController()
+        
+        if imagepicker.isEditing { return }
+        
+        if mode == .camera {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+            delCnt = 0
+            prepareQRScannerView(self.view)
+            startScanningQRCode()
+        } else {
+            imagepicker.sourceType = .savedPhotosAlbum
+            self.present(imagepicker, animated: true, completion: nil)
+        }
+    }
+    
+    /* This calls up methods which makes code ready for scan codes.
+     - parameter view: UIView in which you want to add scanner.
+     */
     
     func prepareQRScannerView(_ view: UIView) {
         setupCaptureSession(devicePosition) //Default device capture position is rear
@@ -163,7 +163,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         addButtons(view)
     }
     
-    ///Creates corner rectagle frame with green coloe(default color)
+    //Creates corner rectagle frame with green coloe(default color)
     func createCornerFrame() {
         let width: CGFloat = 200.0
         let height: CGFloat = 200.0
@@ -200,8 +200,9 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         view.layer.insertSublayer(noteText, above: maskLayer)
     }
     
-    /// Adds buttons to view which can we used as extra fearures
+    // Adds buttons to view which can we used as extra fearures
     private func addButtons(_ view: UIView) {
+        
         let height: CGFloat = 44.0
         let width: CGFloat = 44.0
         let btnWidthWhenCancelImageNil: CGFloat = 60.0
@@ -247,9 +248,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     @objc func toggleTorch() {
         //If device postion is front then no need to torch
         if let currentInput = getCurrentInput() {
-            if currentInput.device.position == .front {
-                return
-            }
+            if currentInput.device.position == .front { return }
         }
         
         guard  let defaultDevice = defaultDevice else {return}
@@ -302,16 +301,12 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     //MARK: - Setup and start capturing session
     
     open func startScanningQRCode() {
-        if captureSession.isRunning {
-            return
-        }
+        if captureSession.isRunning { return }
         captureSession.startRunning()
     }
     
     private func setupCaptureSession(_ devicePostion: AVCaptureDevice.Position) {
-        if captureSession.isRunning {
-            return
-        }
+        if captureSession.isRunning { return }
         
         switch devicePosition {
         case .front:
@@ -323,7 +318,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
                 }
                 captureSession.addInput(frontDeviceInput)
             }
-            break;
+            break
         case .back, .unspecified :
             if let defaultDeviceInput = defaultCaptureInput {
                 if !captureSession.canAddInput(defaultDeviceInput) {
@@ -334,6 +329,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
                 captureSession.addInput(defaultDeviceInput)
             }
             break
+        default: print("Do nothing")
         }
         
         if !captureSession.canAddOutput(dataOutput) {
@@ -347,13 +343,13 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         dataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
     }
     
-    ///Inserts layer to view
+    //Inserts layer to view
     private func addViedoPreviewLayer(_ view: UIView) {
         videoPreviewLayer.frame = CGRect(x:view.bounds.origin.x, y: view.bounds.origin.y, width: view.bounds.size.width, height: view.bounds.size.height - bottomSpace)
         view.layer.insertSublayer(videoPreviewLayer, at: 0)
     }
     
-    /// This method get called when Scanning gets complete
+    // This method get called when Scanning gets complete
     public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
         for data in metadataObjects {
@@ -375,28 +371,24 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         }
     }
     
-    ///This method get called when scan mode is Gallery
+    //This method get called when scan mode is Gallery
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
+        // Local variable inserted by Swift 4.2 migrator.
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        
         if let qrcodeImg = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
-            let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])!
+            let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])!
             let ciImage:CIImage=CIImage(image:qrcodeImg)!
-            var qrCodeLink=""
+            var qrCodeLink = ""
             
             let features=detector.features(in: ciImage)
             for feature in features as! [CIQRCodeFeature] {
                 qrCodeLink += feature.messageString!
             }
             
-            if qrCodeLink=="" {
-                print("nothing")
-            }else{
-                print("message: \(qrCodeLink)")
-            }
-        }
-        else{
+            if qrCodeLink == "" { print("nothing")
+            } else { print("message: \(qrCodeLink)") }
+        } else {
             print("Something went wrong")
         }
         self.dismiss(animated: true, completion: nil)
@@ -408,7 +400,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 ///Currently Scanner suppoerts only portrait mode.
 ///This makes sure orientation is portrait
 extension QRCodeScannerController {
-    ///Make orientations to portrait
+    //Make orientations to portrait
+    
     override public var shouldAutorotate: Bool {
         return false
     }
@@ -422,91 +415,13 @@ extension QRCodeScannerController {
     }
 }
 
-/// This class is for draw corners of Square to show frame for scan QR code.
-///@IBInspectable parameters are the line color, sizeMultiplier, line width.
-
-class SquareView: UIView {
-    var sizeMultiplier : CGFloat = 0.1 {
-        didSet{
-            self.draw(self.bounds)
-        }
-    }
-
-    var lineWidth : CGFloat = 2 {
-        didSet{
-            self.draw(self.bounds)
-        }
-    }
-
-    var lineColor : UIColor = UIColor.green {
-        didSet{
-            self.draw(self.bounds)
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.backgroundColor = UIColor.clear
-    }
-    
-    func drawCorners() {
-        let rectCornerContext = UIGraphicsGetCurrentContext()
-        
-        rectCornerContext?.setLineWidth(lineWidth)
-        rectCornerContext?.setStrokeColor(lineColor.cgColor)
-        
-        //top left corner
-        rectCornerContext?.beginPath()
-        rectCornerContext?.move(to: CGPoint(x: 0, y: 0))
-        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width*sizeMultiplier, y: 0))
-        rectCornerContext?.strokePath()
-        
-        //top rigth corner
-        rectCornerContext?.beginPath()
-        rectCornerContext?.move(to: CGPoint(x: self.bounds.size.width - self.bounds.size.width*sizeMultiplier, y: 0))
-        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width, y: 0))
-        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height*sizeMultiplier))
-        rectCornerContext?.strokePath()
-        
-        //bottom rigth corner
-        rectCornerContext?.beginPath()
-        rectCornerContext?.move(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height - self.bounds.size.height*sizeMultiplier))
-        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height))
-        rectCornerContext?.addLine(to: CGPoint(x: self.bounds.size.width - self.bounds.size.width*sizeMultiplier, y: self.bounds.size.height))
-        rectCornerContext?.strokePath()
-        
-        //bottom left corner
-        rectCornerContext?.beginPath()
-        rectCornerContext?.move(to: CGPoint(x: self.bounds.size.width*sizeMultiplier, y: self.bounds.size.height))
-        rectCornerContext?.addLine(to: CGPoint(x: 0, y: self.bounds.size.height))
-        rectCornerContext?.addLine(to: CGPoint(x: 0, y: self.bounds.size.height - self.bounds.size.height*sizeMultiplier))
-        rectCornerContext?.strokePath()
-        
-        //second part of top left corner
-        rectCornerContext?.beginPath()
-        rectCornerContext?.move(to: CGPoint(x: 0, y: self.bounds.size.height*sizeMultiplier))
-        rectCornerContext?.addLine(to: CGPoint(x: 0, y: 0))
-        rectCornerContext?.strokePath()
-    }
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        self.drawCorners()
-    }
-    
-}
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+    return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
 }
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
+    return input.rawValue
 }
