@@ -13,6 +13,7 @@ Without camera and flash buttons:
 With camera and flash buttons:
 
 <img src="https://user-images.githubusercontent.com/30258541/71320169-97afd500-24cd-11ea-89c7-5d6be7c2fc55.png" width="320" height="568">
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
