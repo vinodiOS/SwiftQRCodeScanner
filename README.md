@@ -8,12 +8,11 @@
 ## Screenshots
 Without camera and flash buttons:
 
-![](https://user-images.githubusercontent.com/30258541/71320186-e2315180-24cd-11ea-8be8-a616eb0e2c37.png){:height="50%" width="50%"}
+<img src="https://user-images.githubusercontent.com/30258541/71320186-e2315180-24cd-11ea-8be8-a616eb0e2c37.png" width="320" height="628">
 
 With camera and flash buttons:
 
-![](https://user-images.githubusercontent.com/30258541/71320169-97afd500-24cd-11ea-89c7-5d6be7c2fc55.png){:height="50%" width="50%"}
-
+<img src="https://user-images.githubusercontent.com/30258541/71320169-97afd500-24cd-11ea-89c7-5d6be7c2fc55.png" width="320" height="628">
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
