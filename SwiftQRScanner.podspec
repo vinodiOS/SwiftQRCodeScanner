@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftQRScanner'
-  s.version          = '0.1.4'
+  s.version          = '1.0.9'
   s.summary          = 'Read QR Codes using SwiftQRScanner'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,8 @@ Read QR codes using SwiftQRScanner with easy steps.
   s.source           = { :git => 'https://github.com/vinodiOS/SwiftQRScanner.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
+ 
 
   s.source_files = 'Classes/**/*'
    s.resource_bundles = {
