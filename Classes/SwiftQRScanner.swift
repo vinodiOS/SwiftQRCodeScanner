@@ -9,12 +9,6 @@ import UIKit
 import CoreGraphics
 import AVFoundation
 
-///This enum defines the scan modes
-public enum QRScanMode {
-    case camera
-    case gallery
-}
-
 /*
  This protocol defines methods which get called when some events occures.
  */
@@ -32,10 +26,9 @@ public protocol QRScannerCodeDelegate: class {
 
 public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIImagePickerControllerDelegate, UINavigationBarDelegate {
     
-    public var mode: QRScanMode = .camera
     var squareView: SquareView? = nil
     public weak var delegate: QRScannerCodeDelegate?
-    var flashButton: UIButton = UIButton()
+    private var flashButton: UIButton? = nil
     
     //Extra images for adding extra features
     public var cameraImage: UIImage? = nil
@@ -44,7 +37,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     public var flashOffImage: UIImage? = nil
     
     //Default Properties
-    private let bottomSpace: CGFloat = 60.0
+    private let bottomSpace: CGFloat = 80.0
     private let spaceFactor: CGFloat = 16.0
     private let devicePosition: AVCaptureDevice.Position = .back
     private var delCnt: Int = 0
@@ -136,20 +129,11 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Currently only "Portraint" mode is supported
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        delCnt = 0
+        prepareQRScannerView(self.view)
+        startScanningQRCode()
         
-        let imagepicker = UIImagePickerController()
-        
-        if imagepicker.isEditing { return }
-        
-        if mode == .camera {
-            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-            delCnt = 0
-            prepareQRScannerView(self.view)
-            startScanningQRCode()
-        } else {
-            imagepicker.sourceType = .savedPhotosAlbum
-            self.present(imagepicker, animated: true, completion: nil)
-        }
     }
     
     /* This calls up methods which makes code ready for scan codes.
@@ -168,7 +152,11 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         let width: CGFloat = 200.0
         let height: CGFloat = 200.0
         
-        let rect = CGRect.init(origin: CGPoint.init(x: self.view.frame.midX - width/2, y: self.view.frame.midY - (width+bottomSpace)/2), size: CGSize.init(width: width, height: height))
+        let rect = CGRect.init(
+            origin: CGPoint.init(
+                x: self.view.frame.midX - width/2,
+                y: self.view.frame.midY - (width+bottomSpace)/2),
+            size: CGSize.init(width: width, height: height))
         self.squareView = SquareView(frame: rect)
         if let squareView = squareView {
             self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
@@ -210,10 +198,18 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         //Cancel button
         let cancelButton = UIButton()
         if let cancelImg = cancelImage {
-            cancelButton.frame = CGRect(x: view.frame.width/2 - width/2, y: view.frame.height - height, width: width, height: height)
+            cancelButton.frame = CGRect(
+                x: view.frame.width/2 - width/2,
+                y: view.frame.height - 60,
+                width: width,
+                height: height)
             cancelButton.setImage(cancelImg, for: .normal)
         } else {
-            cancelButton.frame = CGRect(x: view.frame.width/2 - btnWidthWhenCancelImageNil/2, y: view.frame.height - height, width: btnWidthWhenCancelImageNil, height: height)
+            cancelButton.frame = CGRect(
+                x: view.frame.width/2 - btnWidthWhenCancelImageNil/2,
+                y: view.frame.height - 60,
+                width: btnWidthWhenCancelImageNil,
+                height: height)
             cancelButton.setTitle("Cancel", for: .normal)
         }
         cancelButton.contentMode = .scaleAspectFit
@@ -221,27 +217,32 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
         view.addSubview(cancelButton)
         
         //Torch button
-        flashButton = UIButton(frame: CGRect(x: 16, y: self.view.bounds.size.height - (bottomSpace + height + 10), width: width, height: height))
-        flashButton.tintColor = UIColor.white
-        flashButton.layer.cornerRadius = height/2
-        flashButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        flashButton.contentMode = .scaleAspectFit
-        flashButton.addTarget(self, action: #selector(toggleTorch), for: .touchUpInside)
         if let flashOffImg = flashOffImage {
-            flashButton.setImage(flashOffImg, for: .normal)
-            view.addSubview(flashButton)
+            let flashButtonFrame = CGRect(x: 16, y: self.view.bounds.size.height - (bottomSpace + height + 10), width: width, height: height)
+            flashButton = createButtons(flashButtonFrame, height: height)
+            flashButton!.addTarget(self, action: #selector(toggleTorch), for: .touchUpInside)
+            flashButton!.setImage(flashOffImg, for: .normal)
+            view.addSubview(flashButton!)
         }
         
         //Camera button
-        let cameraButton = UIButton(frame: CGRect(x: self.view.bounds.width - (width + 16), y: self.view.bounds.size.height - (bottomSpace + height + 10), width: width, height: height))
-        cameraButton.addTarget(self, action: #selector(switchCamera), for: .touchUpInside)
-        cameraButton.layer.cornerRadius = height/2
-        cameraButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        cameraButton.contentMode = .scaleAspectFit
         if let cameraImg = cameraImage {
-            cameraButton.setImage(cameraImg, for: .normal)
-            view.addSubview(cameraButton)
+            let frame = CGRect(x: self.view.bounds.width - (width + 16), y: self.view.bounds.size.height - (bottomSpace + height + 10), width: width, height: height)
+            let cameraSwitchButton = createButtons(frame, height: height)
+            cameraSwitchButton.setImage(cameraImg, for: .normal)
+            cameraSwitchButton.addTarget(self, action: #selector(switchCamera), for: .touchUpInside)
+            view.addSubview(cameraSwitchButton)
         }
+    }
+    
+    func createButtons(_ frame: CGRect, height: CGFloat) -> UIButton {
+        let button = UIButton()
+        button.frame = frame
+        button.tintColor = UIColor.white
+        button.layer.cornerRadius = height/2
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        button.contentMode = .scaleAspectFit
+        return button
     }
     
     //Toggle torch
@@ -258,11 +259,11 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
                 defaultDevice.torchMode = defaultDevice.torchMode == .on ? .off : .on
                 if defaultDevice.torchMode == .on {
                     if let flashOnImage = flashOnImage {
-                        self.flashButton.setImage(flashOnImage, for: .normal)
+                        flashButton!.setImage(flashOnImage, for: .normal)
                     }
                 } else {
                     if let flashOffImage = flashOffImage {
-                        self.flashButton.setImage(flashOffImage, for: .normal)
+                        flashButton!.setImage(flashOffImage, for: .normal)
                     }
                 }
                 
@@ -370,32 +371,7 @@ public class QRCodeScannerController: UIViewController, AVCaptureMetadataOutputO
             }
         }
     }
-    
-    //This method get called when scan mode is Gallery
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        // Local variable inserted by Swift 4.2 migrator.
-        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-        
-        if let qrcodeImg = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
-            let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])!
-            let ciImage:CIImage=CIImage(image:qrcodeImg)!
-            var qrCodeLink = ""
-            
-            let features=detector.features(in: ciImage)
-            for feature in features as! [CIQRCodeFeature] {
-                qrCodeLink += feature.messageString!
-            }
-            
-            if qrCodeLink == "" { print("nothing")
-            } else { print("message: \(qrCodeLink)") }
-        } else {
-            print("Something went wrong")
-        }
-        self.dismiss(animated: true, completion: nil)
-    }
-    
 }
-
 
 ///Currently Scanner suppoerts only portrait mode.
 ///This makes sure orientation is portrait
@@ -415,13 +391,3 @@ extension QRCodeScannerController {
     }
 }
 
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-    return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-    return input.rawValue
-}
