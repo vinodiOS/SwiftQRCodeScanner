@@ -39,7 +39,7 @@ just be sure you have the **copy items if needed** and the **create groups** opt
 Import SwiftQRScanner module and confirm to the QRScannerCodeDelegate protocol.
 
 ```
-#import SwiftQRScanner
+import SwiftQRScanner
 
 class ViewController: UIViewController {
 }
