@@ -1,5 +1,5 @@
 # SwiftQRCodeScanner
-![QR Scanner](https://user-images.githubusercontent.com/30258541/170004280-ecac29ec-5102-469f-9234-6a5909162937.gif)
+![QR Scanner](https://user-images.githubusercontent.com/30258541/170007055-763fda9a-3edd-4d11-99c9-04f3d3067e8a.gif)
 
 ## Features
 - Easy to use
