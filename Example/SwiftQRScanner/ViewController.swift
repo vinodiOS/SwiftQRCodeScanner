@@ -10,19 +10,29 @@ import UIKit
 import SwiftQRScanner
 
 class ViewController: UIViewController {
-  
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
+    
+    @IBOutlet weak var resultLabel: UILabel!
 
+    
     @IBAction func scanQRCode(_ sender: Any) {
+        self.resultLabel.text = ""
         
-        //QRCode scanner without Camera switch and Torch
+        //Simple QR Code Scanner
         let scanner = QRCodeScannerController()
+        scanner.delegate = self
+        self.present(scanner, animated: true, completion: nil)
+    }
+    
+    @IBAction func scanQRCodeWithExtraOptions(_ sender: Any) {
+        self.resultLabel.text = ""
         
-        //QRCode with Camera switch and Torch
-        //let scanner = QRCodeScannerController(cameraImage: UIImage(named: "camera"), cancelImage: UIImage(named: "cancel"), flashOnImage: UIImage(named: "flash-on"), flashOffImage: UIImage(named: "flash-off"))
+        //Configuration for QR Code Scanner
+        var configuration = QRScannerConfiguration()
+        configuration.cameraImage = UIImage(named: "camera")
+        configuration.flashOnImage = UIImage(named: "flash-on")
+        configuration.galleryImage = UIImage(named: "photos")
+        
+        let scanner = QRCodeScannerController(qrScannerConfiguration: configuration)
         scanner.delegate = self
         self.present(scanner, animated: true, completion: nil)
     }
@@ -30,12 +40,13 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: QRScannerCodeDelegate {
-    func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
-        print("result:\(result)")
+    func qrScannerDidFail(_ controller: UIViewController, error: QRCodeError) {
+        print("error:\(error.localizedDescription)")
     }
     
-    func qrScannerDidFail(_ controller: UIViewController, error: String) {
-        print("error:\(error)")
+    func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
+        self.resultLabel.text = "Result: \n \(result)"
+        print("result:\(result)")
     }
     
     func qrScannerDidCancel(_ controller: UIViewController) {

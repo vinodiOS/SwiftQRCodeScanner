@@ -1,25 +1,21 @@
 # SwiftQRCodeScanner
+![QR Scanner](https://user-images.githubusercontent.com/30258541/169985001-5dfebf8d-3b4a-4b66-a644-0eed23263efc.gif)
 
-[![CI Status](http://img.shields.io/travis/vinodiOS/SwiftQRScanner.svg?style=flat)](https://travis-ci.org/vinodiOS/SwiftQRScanner)
-[![Version](https://img.shields.io/cocoapods/v/SwiftQRScanner.svg?style=flat)](http://cocoapods.org/pods/SwiftQRScanner)
-[![License](https://img.shields.io/cocoapods/l/SwiftQRScanner.svg?style=flat)](http://cocoapods.org/pods/SwiftQRScanner)
-[![Platform](https://img.shields.io/cocoapods/p/SwiftQRScanner.svg?style=flat)](http://cocoapods.org/pods/SwiftQRScanner)
+## Features
+- Easy to use
+- Customize everything
+- Scan QR Code from saved photos
 
 ## Screenshots
-Without camera and flash buttons:
-
-<img src="https://user-images.githubusercontent.com/30258541/71320186-e2315180-24cd-11ea-8be8-a616eb0e2c37.png" width="320" height="568">
-
-With camera and flash buttons:
-
-<img src="https://user-images.githubusercontent.com/30258541/71320169-97afd500-24cd-11ea-89c7-5d6be7c2fc55.png" width="320" height="568">
+| Without camera and flash | With camera and flash |
+| ------ | ------ |
+| <img src="https://user-images.githubusercontent.com/30258541/169960154-a1c4770d-a3df-412c-9064-85abdcbe1ac8.jpeg" width="320" height="568"> | <img src="https://user-images.githubusercontent.com/30258541/169960286-143ba622-0ce2-4252-9d3c-be450641546c.jpeg" width="320" height="568"> |
 
 ## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project, clone the repo, go to Example folder and open SwiftQRScanner.xcworkspace.
 
 ## Requirements
-- iOS 9.0
+- iOS 10.0
 - Xcode 11.0+
 - Swift 5
 
@@ -38,7 +34,7 @@ just be sure you have the **copy items if needed** and the **create groups** opt
 ## How to use
 Import SwiftQRScanner module and confirm to the QRScannerCodeDelegate protocol.
 
-```
+```Swift
 import SwiftQRScanner
 
 class ViewController: UIViewController {
@@ -48,26 +44,48 @@ extension ViewController: QRScannerCodeDelegate {
 }
 ```
 
-Create instance of SwiftQRScanner to scan QR code. To use SwiftQRScanner with simple cancel button option you can code like following:
+Create instance of SwiftQRScanner to scan QR code.
 ```
 let scanner = QRCodeScannerController()
 scanner.delegate = self
 self.present(scanner, animated: true, completion: nil)
 ```
-To use more features like camera switch , flash and cance options you can provide images like following:
+To use more features like camera switch, flash and many other options use **QRScannerConfiguration**:
 ```
-let scanner = QRCodeScannerController(cameraImage: UIImage(named: "camera"), cancelImage: UIImage(named: "cancel"), flashOnImage: UIImage(named: "flash-on"), flashOffImage: UIImage(named: "flash-off"))
+var configuration = QRScannerConfiguration()
+configuration.cameraImage = UIImage(named: "camera")
+configuration.flashOnImage = UIImage(named: "flash-on")
+configuration.galleryImage = UIImage(named: "photos")
+
+let scanner = QRCodeScannerController(qrScannerConfiguration: configuration)
 scanner.delegate = self
 self.present(scanner, animated: true, completion: nil)
 ```
+You can use following **QRScannerConfiguration** properties:
+
+| Property Name | Default Value | Description |
+| ------ | ------ |------ |
+| title | Scan QR Code | Title of SwiftQRCodeScanner |
+| hint | Align QR code within frame to scan | Hint for QR Code scan suggestion |
+| uploadFromPhotosTitle | Upload from photos | Button title for pick QR Code from saved photos |
+| invalidQRCodeAlertTitle | Invalid QR Code | Title for Alert if invalid QR Code |
+| invalidQRCodeAlertActionTitle | OK | Title for Action if invalid QR Code |
+| cameraImage | nil | Image for camera switch button |
+| flashOnImage | nil | Image for flash button |
+| length | 20.0 | Length of QR Code scanning frame |
+| color | green | Color of QR Code scanning frame |
+| radius | 10.0 | Corner Radius of QR Code scanning frame |
+| thickness | 5.0 | Corner Thickness of QR Code scanning frame |
+| readQRFromPhotos | true | Hide/show "Upload From photos" button|
+
 And finally implement delegate methods to get result:
 ```
 func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
     print("result:\(result)")
 }
 
-func qrScannerDidFail(_ controller: UIViewController, error: String) {
-    print("error:\(error)")
+func qrScannerDidFail(_ controller: UIViewController, error: QRCodeError) {
+    print("error:\(error.localizedDescription)")
 }
 
 func qrScannerDidCancel(_ controller: UIViewController) {
@@ -82,3 +100,4 @@ Vinod, vinod.jagtap@hotmail.com
 ## License
 
 SwiftQRScanner is available under the MIT license. See the LICENSE file for more info.
+
