@@ -7,9 +7,11 @@
 - Scan QR Code from saved photos
 
 ## Screenshots
-| Without camera and flash | With camera and flash |
-| ------ | ------ |
-| <img src="https://user-images.githubusercontent.com/30258541/169960154-a1c4770d-a3df-412c-9064-85abdcbe1ac8.jpeg"> | <img src="https://user-images.githubusercontent.com/30258541/169960286-143ba622-0ce2-4252-9d3c-be450641546c.jpeg"> |
+**Without camera and flash** 
+<img src="https://user-images.githubusercontent.com/30258541/169960154-a1c4770d-a3df-412c-9064-85abdcbe1ac8.jpeg"> 
+
+**With camera and flash**
+<img src="https://user-images.githubusercontent.com/30258541/169960286-143ba622-0ce2-4252-9d3c-be450641546c.jpeg"> 
 
 ## Example
 To run the example project, clone the repo, go to Example folder and open SwiftQRScanner.xcworkspace.
