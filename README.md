@@ -47,13 +47,13 @@ extension ViewController: QRScannerCodeDelegate {
 ```
 
 Create instance of SwiftQRScanner to scan QR code.
-```
+```Swift
 let scanner = QRCodeScannerController()
 scanner.delegate = self
 self.present(scanner, animated: true, completion: nil)
 ```
 To use more features like camera switch, flash and many other options use **QRScannerConfiguration**:
-```
+```Swift
 var configuration = QRScannerConfiguration()
 configuration.cameraImage = UIImage(named: "camera")
 configuration.flashOnImage = UIImage(named: "flash-on")
