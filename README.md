@@ -67,11 +67,11 @@ You can use following **QRScannerConfiguration** properties:
 
 | Property Name | Default Value | Description |
 | ------ | ------ |------ |
-| title | Scan QR Code | Title of SwiftQRCodeScanner |
-| hint | Align QR code within frame to scan | Hint for QR Code scan suggestion |
-| uploadFromPhotosTitle | Upload from photos | Button title for pick QR Code from saved photos |
-| invalidQRCodeAlertTitle | Invalid QR Code | Title for Alert if invalid QR Code |
-| invalidQRCodeAlertActionTitle | OK | Title for Action if invalid QR Code |
+| title | "Scan QR Code" | Title of SwiftQRCodeScanner |
+| hint | "Align QR code within frame to scan" | Hint for QR Code scan suggestion |
+| uploadFromPhotosTitle | "Upload from photos" | Button title for pick QR Code from saved photos |
+| invalidQRCodeAlertTitle | "Invalid QR Code" | Title for Alert if invalid QR Code |
+| invalidQRCodeAlertActionTitle | "OK" | Title for Action if invalid QR Code |
 | cameraImage | nil | Image for camera switch button |
 | flashOnImage | nil | Image for flash button |
 | length | 20.0 | Length of QR Code scanning frame |
@@ -79,7 +79,7 @@ You can use following **QRScannerConfiguration** properties:
 | radius | 10.0 | Corner Radius of QR Code scanning frame |
 | thickness | 5.0 | Corner Thickness of QR Code scanning frame |
 | readQRFromPhotos | true | Hide/show "Upload From photos" button|
-| cancelButtonTitle | Cancel | Title for cancel button |
+| cancelButtonTitle | "Cancel" | Title for cancel button |
 | cancelButtonTintColor | nil | Color for cancel button |
 
 
