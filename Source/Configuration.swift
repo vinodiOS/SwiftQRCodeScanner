@@ -21,6 +21,8 @@ public struct QRScannerConfiguration {
     public var radius: CGFloat
     public var thickness: CGFloat
     public var readQRFromPhotos: Bool
+    public var cancelButtonTitle: String
+    public var cancelButtonTintColor: UIColor?
     
     public init(title: String = "Scan QR Code",
                 hint: String = "Align QR code within frame to scan",
@@ -33,7 +35,9 @@ public struct QRScannerConfiguration {
                 color: UIColor = .green,
                 radius: CGFloat = 10.0,
                 thickness: CGFloat = 5.0,
-                readQRFromPhotos: Bool = true) {
+                readQRFromPhotos: Bool = true,
+                cancelButtonTitle: String = "Cancel",
+                cancelButtonTintColor: UIColor? = nil) {
         self.title = title
         self.hint = hint
         self.uploadFromPhotosTitle = uploadFromPhotosTitle
@@ -46,6 +50,8 @@ public struct QRScannerConfiguration {
         self.radius = radius
         self.thickness = thickness
         self.readQRFromPhotos = readQRFromPhotos
+        self.cancelButtonTitle = cancelButtonTitle
+        self.cancelButtonTintColor = cancelButtonTintColor
     }
 }
 
@@ -62,6 +68,8 @@ extension QRScannerConfiguration {
                                color: .green,
                                radius: 10.0,
                                thickness: 5.0,
-                               readQRFromPhotos: true)
+                               readQRFromPhotos: true,
+                               cancelButtonTitle: "Cancel",
+                               cancelButtonTintColor: nil)
     }
 }

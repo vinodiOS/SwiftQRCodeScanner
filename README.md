@@ -79,6 +79,9 @@ You can use following **QRScannerConfiguration** properties:
 | radius | 10.0 | Corner Radius of QR Code scanning frame |
 | thickness | 5.0 | Corner Thickness of QR Code scanning frame |
 | readQRFromPhotos | true | Hide/show "Upload From photos" button|
+| cancelButtonTitle | Cancel | Title for cancel button |
+| cancelButtonTintColor | nil | Color for cancel button |
+
 
 And finally implement delegate methods to get result:
 ```

@@ -119,11 +119,16 @@ public class QRCodeScannerController: UIViewController,
         view.addSubview(navigationBar)
         
         let title = UINavigationItem(title: qrScannerConfiguration.title)
-        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                              target: nil,
-                                              action: #selector(dismissVC))
+        let cancelBarButton = UIBarButtonItem(title: qrScannerConfiguration.cancelButtonTitle,
+                                     style: .plain,
+                                     target: nil,
+                                     action: #selector(dismissVC))
+        if let tintColor = qrScannerConfiguration.cancelButtonTintColor {
+            cancelBarButton.tintColor = tintColor
+        }
         title.leftBarButtonItem = cancelBarButton
         navigationBar.setItems([title], animated: false)
+        self.presentationController?.delegate = self
         
         //Currently only "Portraint" mode is supported
         UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
@@ -335,6 +340,12 @@ public class QRCodeScannerController: UIViewController,
                 }
             }
         }
+    }
+}
+
+extension QRCodeScannerController: UIAdaptivePresentationControllerDelegate {
+    public func presentationControllerDidDismiss( _ presentationController: UIPresentationController) {
+        self.delegate?.qrScannerDidCancel(self)
     }
 }
 
