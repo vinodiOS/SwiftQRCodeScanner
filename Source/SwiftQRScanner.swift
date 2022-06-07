@@ -121,7 +121,7 @@ public class QRCodeScannerController: UIViewController,
         let title = UINavigationItem(title: qrScannerConfiguration.title)
         let cancelBarButton = UIBarButtonItem(title: qrScannerConfiguration.cancelButtonTitle,
                                      style: .plain,
-                                     target: nil,
+                                     target: self,
                                      action: #selector(dismissVC))
         if let tintColor = qrScannerConfiguration.cancelButtonTintColor {
             cancelBarButton.tintColor = tintColor
