@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftQRScanner'
-  s.version          = '1.1.3'
+  s.version          = '1.1.4'
   s.summary          = 'Read QR Codes using SwiftQRScanner'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ Read QR codes using SwiftQRScanner with easy steps.
   s.ios.deployment_target = '10.0'
  
 
-  s.source_files = 'Sources/SwiftQRScanner/Classes/**/*'
+  s.source_files = 'Sources/SwiftQRCodeScanner/Classes/**/*'
    s.resource_bundles = {
      'SwiftQRScanner' => ['SwiftQRScanner/Assets/*.png']
    }

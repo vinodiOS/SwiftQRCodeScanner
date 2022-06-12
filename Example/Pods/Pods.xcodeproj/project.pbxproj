@@ -141,7 +141,7 @@
 		536B8873C8BE24A809ECC75847D97521 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E2DA771CBE9D200E63331C5744E688AC /* SwiftQRScanner */,
+				E2DA771CBE9D200E63331C5744E688AC /* SwiftQRCodeScanner */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -228,13 +228,13 @@
 			path = "Target Support Files/Pods-SwiftQRScanner_Example";
 			sourceTree = "<group>";
 		};
-		E2DA771CBE9D200E63331C5744E688AC /* SwiftQRScanner */ = {
+		E2DA771CBE9D200E63331C5744E688AC /* SwiftQRCodeScanner */ = {
 			isa = PBXGroup;
 			children = (
 				1AD7C3922855ADDF00B8B795 /* Classes */,
 				42F693E77C10C84AB5357F517CD7ACBC /* Support Files */,
 			);
-			name = SwiftQRScanner;
+			name = SwiftQRCodeScanner;
 			path = ../..;
 			sourceTree = "<group>";
 		};
