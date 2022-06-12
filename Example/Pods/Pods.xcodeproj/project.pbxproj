@@ -121,7 +121,7 @@
 				1AD7C39B2855ADDF00B8B795 /* Configuration.swift */,
 			);
 			name = Classes;
-			path = Sources/SwiftQRScanner/Classes;
+			path = Sources/SwiftQRCodeScanner/Classes;
 			sourceTree = "<group>";
 		};
 		42F693E77C10C84AB5357F517CD7ACBC /* Support Files */ = {
