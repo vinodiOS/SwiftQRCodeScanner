@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		01894FD614469EA3BE8D196B2195A99D /* SwiftQRScanner-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B46C4915D98CDAA30EF3C5F9F90003E /* SwiftQRScanner-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06A1D8C43112DA99553D9D3270C76879 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		1A93CF572826D13B00C46F77 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A93CF562826D13B00C46F77 /* Configuration.swift */; };
-		1A9AE8AD283A6C97005D791A /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9AE8AC283A6C97005D791A /* RoundButton.swift */; };
-		1AA2D6C42819399C000FB5CE /* SwiftQRScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2D6C32819399C000FB5CE /* SwiftQRScannerDelegate.swift */; };
-		1AA316CD2831692700DDFD32 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA316CC2831692700DDFD32 /* ImagePicker.swift */; };
-		1AAD75EE283B9FBE00057BF5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAD75ED283B9FBE00057BF5 /* UIImage+Extension.swift */; };
-		1AB26B41283029E200CDDAC2 /* QRCodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB26B40283029E200CDDAC2 /* QRCodeError.swift */; };
-		402A23E61FD7189A00E3612F /* SwiftQRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402A23E51FD7189A00E3612F /* SwiftQRScanner.swift */; };
-		40313A1B23AF781D006696C4 /* QRScannerFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40313A1923AF7754006696C4 /* QRScannerFrame.swift */; };
+		1AD7C39C2855ADDF00B8B795 /* QRCodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7C3932855ADDF00B8B795 /* QRCodeError.swift */; };
+		1AD7C39D2855ADDF00B8B795 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7C3942855ADDF00B8B795 /* UIImage+Extension.swift */; };
+		1AD7C39E2855ADDF00B8B795 /* SwiftQRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7C3962855ADDF00B8B795 /* SwiftQRScanner.swift */; };
+		1AD7C39F2855ADDF00B8B795 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7C3972855ADDF00B8B795 /* ImagePicker.swift */; };
+		1AD7C3A02855ADDF00B8B795 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7C3982855ADDF00B8B795 /* RoundButton.swift */; };
+		1AD7C3A12855ADDF00B8B795 /* SwiftQRScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7C3992855ADDF00B8B795 /* SwiftQRScannerDelegate.swift */; };
+		1AD7C3A22855ADDF00B8B795 /* QRScannerFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7C39A2855ADDF00B8B795 /* QRScannerFrame.swift */; };
+		1AD7C3A32855ADDF00B8B795 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7C39B2855ADDF00B8B795 /* Configuration.swift */; };
 		407DBB1293B3D3247F7682DD9293698C /* Pods-SwiftQRScanner_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 862A0705FF7E7A77C7BC6EFB71FDF390 /* Pods-SwiftQRScanner_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8301E0C140D30AEDF06E45FF056B0F93 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		91CC4D84B43952B6C783E7FCF6A0AB1C /* Pods-SwiftQRScanner_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B71D023E64A6293A1BD6274277272033 /* Pods-SwiftQRScanner_Example-dummy.m */; };
@@ -40,19 +40,20 @@
 		0A060CFFA32714850F6E8AEA0AC71233 /* SwiftQRScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftQRScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B46C4915D98CDAA30EF3C5F9F90003E /* SwiftQRScanner-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftQRScanner-umbrella.h"; sourceTree = "<group>"; };
 		11BADD779A829D089669522E19E4EA67 /* SwiftQRScanner.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftQRScanner.modulemap; sourceTree = "<group>"; };
-		1A93CF562826D13B00C46F77 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		1A9AE8AC283A6C97005D791A /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
-		1AA2D6C32819399C000FB5CE /* SwiftQRScannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftQRScannerDelegate.swift; sourceTree = "<group>"; };
-		1AA316CC2831692700DDFD32 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		1AAD75ED283B9FBE00057BF5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		1AB26B40283029E200CDDAC2 /* QRCodeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeError.swift; sourceTree = "<group>"; };
+		1AD7C3932855ADDF00B8B795 /* QRCodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeError.swift; sourceTree = "<group>"; };
+		1AD7C3942855ADDF00B8B795 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		1AD7C3952855ADDF00B8B795 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		1AD7C3962855ADDF00B8B795 /* SwiftQRScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftQRScanner.swift; sourceTree = "<group>"; };
+		1AD7C3972855ADDF00B8B795 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		1AD7C3982855ADDF00B8B795 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		1AD7C3992855ADDF00B8B795 /* SwiftQRScannerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftQRScannerDelegate.swift; sourceTree = "<group>"; };
+		1AD7C39A2855ADDF00B8B795 /* QRScannerFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerFrame.swift; sourceTree = "<group>"; };
+		1AD7C39B2855ADDF00B8B795 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		223F8D54C2CD4403C63B6ADF7343C9A9 /* Pods-SwiftQRScanner_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftQRScanner_Example-frameworks.sh"; sourceTree = "<group>"; };
 		2E9F97498E8E90BD6B22A816B1FC3CA9 /* Pods_SwiftQRScanner_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftQRScanner_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FAFD3A2CAA261770F10B02048B48752 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FFC32C29A0B0D42B4491E3119265C39 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3631B6811566A18AF5946DB8FD77C52A /* Pods-SwiftQRScanner_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftQRScanner_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		402A23E51FD7189A00E3612F /* SwiftQRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftQRScanner.swift; sourceTree = "<group>"; };
-		40313A1923AF7754006696C4 /* QRScannerFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerFrame.swift; sourceTree = "<group>"; };
 		43D24BE33EFABFD607A10C9875C3BC8A /* Pods_SwiftQRScanner_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftQRScanner_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F7EE195556DE779E337489955AD3FD /* Pods-SwiftQRScanner_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SwiftQRScanner_Example.modulemap"; sourceTree = "<group>"; };
 		5385E2BCC5A382EFB62403F309846A93 /* Pods-SwiftQRScanner_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SwiftQRScanner_Tests.modulemap"; sourceTree = "<group>"; };
@@ -106,19 +107,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		402A23E71FD718B600E3612F /* Source */ = {
+		1AD7C3922855ADDF00B8B795 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				402A23E51FD7189A00E3612F /* SwiftQRScanner.swift */,
-				40313A1923AF7754006696C4 /* QRScannerFrame.swift */,
-				1AA2D6C32819399C000FB5CE /* SwiftQRScannerDelegate.swift */,
-				1A93CF562826D13B00C46F77 /* Configuration.swift */,
-				1AB26B40283029E200CDDAC2 /* QRCodeError.swift */,
-				1AA316CC2831692700DDFD32 /* ImagePicker.swift */,
-				1A9AE8AC283A6C97005D791A /* RoundButton.swift */,
-				1AAD75ED283B9FBE00057BF5 /* UIImage+Extension.swift */,
+				1AD7C3932855ADDF00B8B795 /* QRCodeError.swift */,
+				1AD7C3942855ADDF00B8B795 /* UIImage+Extension.swift */,
+				1AD7C3952855ADDF00B8B795 /* .gitkeep */,
+				1AD7C3962855ADDF00B8B795 /* SwiftQRScanner.swift */,
+				1AD7C3972855ADDF00B8B795 /* ImagePicker.swift */,
+				1AD7C3982855ADDF00B8B795 /* RoundButton.swift */,
+				1AD7C3992855ADDF00B8B795 /* SwiftQRScannerDelegate.swift */,
+				1AD7C39A2855ADDF00B8B795 /* QRScannerFrame.swift */,
+				1AD7C39B2855ADDF00B8B795 /* Configuration.swift */,
 			);
-			path = Source;
+			name = Classes;
+			path = Sources/SwiftQRScanner/Classes;
 			sourceTree = "<group>";
 		};
 		42F693E77C10C84AB5357F517CD7ACBC /* Support Files */ = {
@@ -228,7 +231,7 @@
 		E2DA771CBE9D200E63331C5744E688AC /* SwiftQRScanner */ = {
 			isa = PBXGroup;
 			children = (
-				402A23E71FD718B600E3612F /* Source */,
+				1AD7C3922855ADDF00B8B795 /* Classes */,
 				42F693E77C10C84AB5357F517CD7ACBC /* Support Files */,
 			);
 			name = SwiftQRScanner;
@@ -372,15 +375,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A9AE8AD283A6C97005D791A /* RoundButton.swift in Sources */,
-				1AA2D6C42819399C000FB5CE /* SwiftQRScannerDelegate.swift in Sources */,
-				40313A1B23AF781D006696C4 /* QRScannerFrame.swift in Sources */,
-				1AAD75EE283B9FBE00057BF5 /* UIImage+Extension.swift in Sources */,
-				1A93CF572826D13B00C46F77 /* Configuration.swift in Sources */,
-				1AA316CD2831692700DDFD32 /* ImagePicker.swift in Sources */,
-				402A23E61FD7189A00E3612F /* SwiftQRScanner.swift in Sources */,
-				1AB26B41283029E200CDDAC2 /* QRCodeError.swift in Sources */,
+				1AD7C3A02855ADDF00B8B795 /* RoundButton.swift in Sources */,
+				1AD7C39D2855ADDF00B8B795 /* UIImage+Extension.swift in Sources */,
+				1AD7C39E2855ADDF00B8B795 /* SwiftQRScanner.swift in Sources */,
+				1AD7C3A32855ADDF00B8B795 /* Configuration.swift in Sources */,
+				1AD7C39F2855ADDF00B8B795 /* ImagePicker.swift in Sources */,
+				1AD7C3A12855ADDF00B8B795 /* SwiftQRScannerDelegate.swift in Sources */,
+				1AD7C39C2855ADDF00B8B795 /* QRCodeError.swift in Sources */,
 				AE682B190D72E4CDF3F41E74CE86A887 /* SwiftQRScanner-dummy.m in Sources */,
+				1AD7C3A22855ADDF00B8B795 /* QRScannerFrame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
