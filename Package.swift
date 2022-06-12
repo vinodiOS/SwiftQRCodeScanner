@@ -24,8 +24,5 @@ let package = Package(
         .target(
             name: "SwiftQRCodeScanner",
             dependencies: []),
-        .testTarget(
-            name: "SwiftQRCodeScannerTests",
-            dependencies: ["SwiftQRCodeScanner"]),
     ]
 )
