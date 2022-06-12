@@ -42,7 +42,6 @@
 		11BADD779A829D089669522E19E4EA67 /* SwiftQRScanner.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftQRScanner.modulemap; sourceTree = "<group>"; };
 		1AD7C3932855ADDF00B8B795 /* QRCodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeError.swift; sourceTree = "<group>"; };
 		1AD7C3942855ADDF00B8B795 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		1AD7C3952855ADDF00B8B795 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		1AD7C3962855ADDF00B8B795 /* SwiftQRScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftQRScanner.swift; sourceTree = "<group>"; };
 		1AD7C3972855ADDF00B8B795 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1AD7C3982855ADDF00B8B795 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
@@ -112,7 +111,6 @@
 			children = (
 				1AD7C3932855ADDF00B8B795 /* QRCodeError.swift */,
 				1AD7C3942855ADDF00B8B795 /* UIImage+Extension.swift */,
-				1AD7C3952855ADDF00B8B795 /* .gitkeep */,
 				1AD7C3962855ADDF00B8B795 /* SwiftQRScanner.swift */,
 				1AD7C3972855ADDF00B8B795 /* ImagePicker.swift */,
 				1AD7C3982855ADDF00B8B795 /* RoundButton.swift */,
