@@ -35,6 +35,14 @@ pod 'SwiftQRScanner', :git => ‘https://github.com/vinodiOS/SwiftQRScanner’
 Download the latest version ,then unzip & drag-drop the Classes  folder inside your iOS project. You can do that directly within Xcode,
 just be sure you have the **copy items if needed** and the **create groups** options checked.
 
+### Swift Package Manager Installation
+Swift Package Manager
+```ruby
+dependencies: [
+    .package(url: "https://github.com/danielgindi/Charts.git", .upToNextMajor(from: "4.0.0"))
+]
+```
+
 ## How to use
 Import SwiftQRScanner module and confirm to the QRScannerCodeDelegate protocol.
 
