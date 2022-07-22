@@ -1,0 +1,151 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.SwiftQRCodeScanner-debug.module" : {
+      "executable" : "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/Configuration.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/ImagePicker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/QRCodeError.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/QRScannerFrame.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/RoundButton.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/SwiftQRScanner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/SwiftQRScannerDelegate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/UIImage+Extension.swift"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SwiftQRCodeScanner",
+      "moduleOutputPath" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.swiftmodule",
+      "objects" : [
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/Configuration.swift.o",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/ImagePicker.swift.o",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/QRCodeError.swift.o",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/QRScannerFrame.swift.o",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/RoundButton.swift.o",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/SwiftQRScanner.swift.o",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/SwiftQRScannerDelegate.swift.o",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/UIImage+Extension.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx10.13",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j4",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner-Swift.h",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk",
+        "-F",
+        "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/Configuration.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/ImagePicker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/QRCodeError.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/QRScannerFrame.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/RoundButton.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/SwiftQRScanner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/SwiftQRScannerDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner/UIImage+Extension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/Configuration.swift",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/ImagePicker.swift",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/QRCodeError.swift",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/QRScannerFrame.swift",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/RoundButton.swift",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/SwiftQRScanner.swift",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/SwiftQRScannerDelegate.swift",
+        "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/Sources/SwiftQRCodeScanner/UIImage+Extension.swift"
+      ],
+      "tempsPath" : "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "testDiscoveryCommands" : {
+
+  }
+}

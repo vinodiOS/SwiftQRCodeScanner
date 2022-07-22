@@ -1,0 +1,4 @@
+module SwiftQRCodeScanner {
+    header "/Users/vinodjagtap/Documents/iOS Development/SwiftQRCodeScanner/.build/x86_64-apple-macosx/debug/SwiftQRCodeScanner.build/SwiftQRCodeScanner-Swift.h"
+    requires objc
+}
