@@ -29,10 +29,6 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'SwiftQRScanner', :git => ‘https://github.com/vinodiOS/SwiftQRScanner’
 ```
-### Manual Installation
-Download the latest version ,then unzip & drag-drop the Classes  folder inside your iOS project. You can do that directly within Xcode,
-just be sure you have the **copy items if needed** and the **create groups** options checked.
-
 ### Swift Package Manager Installation
 Swift Package Manager
 ```ruby
@@ -40,6 +36,10 @@ dependencies: [
     .package(url: "https://github.com/vinodiOS/SwiftQRCodeScanner.git", from: "1.1.5")
 ]
 ```
+
+### Manual Installation
+Download the latest version ,then unzip & drag-drop the Classes  folder inside your iOS project. You can do that directly within Xcode,
+just be sure you have the **copy items if needed** and the **create groups** options checked.
 
 ## How to use
 Import SwiftQRScanner module and confirm to the QRScannerCodeDelegate protocol.
