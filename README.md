@@ -91,7 +91,7 @@ You can use following **QRScannerConfiguration** properties:
 
 
 And finally implement delegate methods to get result:
-```
+```Swift
 func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
     print("result:\(result)")
 }
