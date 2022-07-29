@@ -40,6 +40,9 @@ dependencies: [
 Download the latest version ,then unzip & drag-drop the Classes  folder inside your iOS project. You can do that directly within Xcode,
 just be sure you have the **copy items if needed** and the **create groups** options checked.
 
+### Do you want to use SwiftQRCodeScanner with SwiftUI?
+Please follow this example [QRCodeSwiftUIExample](https://github.com/vinodiOS/QRCodeSwiftUIExample).
+
 ## How to use
 Import SwiftQRScanner module and confirm to the QRScannerCodeDelegate protocol.
 
