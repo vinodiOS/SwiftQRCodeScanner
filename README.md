@@ -73,6 +73,20 @@ let scanner = QRCodeScannerController(qrScannerConfiguration: configuration)
 scanner.delegate = self
 self.present(scanner, animated: true, completion: nil)
 ```
+And finally implement delegate methods to get result:
+```Swift
+func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
+    print("result:\(result)")
+}
+
+func qrScannerDidFail(_ controller: UIViewController, error: QRCodeError) {
+    print("error:\(error.localizedDescription)")
+}
+
+func qrScannerDidCancel(_ controller: UIViewController) {
+    print("SwiftQRScanner did cancel")
+}
+```
 
 Complete code:
 ```Swift
@@ -143,22 +157,6 @@ You can use following **QRScannerConfiguration** properties:
 | readQRFromPhotos | true | Hide/show "Upload From photos" button|
 | cancelButtonTitle | "Cancel" | Title for cancel button |
 | cancelButtonTintColor | nil | Color for cancel button |
-
-
-And finally implement delegate methods to get result:
-```Swift
-func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
-    print("result:\(result)")
-}
-
-func qrScannerDidFail(_ controller: UIViewController, error: QRCodeError) {
-    print("error:\(error.localizedDescription)")
-}
-
-func qrScannerDidCancel(_ controller: UIViewController) {
-    print("SwiftQRScanner did cancel")
-}
-```
 
 ## Author
 
