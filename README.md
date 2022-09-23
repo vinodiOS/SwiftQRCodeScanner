@@ -94,13 +94,9 @@ import UIKit
 import SwiftQRScanner
 
 class ViewController: UIViewController {
-    
-    @IBOutlet weak var resultLabel: UILabel!
-
-    
-    @IBAction func scanQRCode(_ sender: Any) {
-        self.resultLabel.text = ""
         
+    @IBAction func scanQRCode(_ sender: Any) {
+    
         //Simple QR Code Scanner
         let scanner = QRCodeScannerController()
         scanner.delegate = self
@@ -108,7 +104,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func scanQRCodeWithExtraOptions(_ sender: Any) {
-        self.resultLabel.text = ""
         
         //Configuration for QR Code Scanner
         var configuration = QRScannerConfiguration()
@@ -129,7 +124,6 @@ extension ViewController: QRScannerCodeDelegate {
     }
     
     func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
-        self.resultLabel.text = "Result: \n \(result)"
         print("result:\(result)")
     }
     
