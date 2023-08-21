@@ -273,9 +273,11 @@ public class QRCodeScannerController: UIViewController,
     
     //MARK: - Setup and start capturing session
     
-    private func startScanningQRCode() {
+   private func startScanningQRCode() {
         if captureSession.isRunning { return }
-        captureSession.startRunning()
+        DispatchQueue.global(qos: .background).async {
+            self.captureSession.startRunning()
+        }
     }
     
     private func setupCaptureSession(_ devicePostion: AVCaptureDevice.Position) {
